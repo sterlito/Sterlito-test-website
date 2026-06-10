@@ -3,286 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FitPro — Programs</title>
+  <title>Fat Loss. On Easy Mode.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep:    '#080F16',
+            storm:   '#0C151E',
+            asphalt: '#1E3147',
+            slate:   '#2D4055',
+            spartan: '#5C7080',
+            arctic:  '#7BBFE8',
+            ochre:   '#C4A030',
+          },
+          fontFamily: {
+            manrope: ['Manrope', 'sans-serif'],
+            inter:   ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
   <style>
-    *, h1, h2, h3, h4, h5, h6, p, ul, a { margin: 0; padding: 0; }
     *, *:before, *:after { box-sizing: border-box; }
-    html, body { overflow-x: hidden; }
-    html { font-size: 10px; }
+    html, body { overflow-x: hidden; margin: 0; padding: 0; }
     body {
-      font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
-      font-size: 1.4rem;
-      line-height: 1.857;
-      background: #0a0a0a;
-      color: #888;
+      font-family: 'Inter', sans-serif;
+      background: #080F16;
+      color: #7BBFE8;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ---- Scrollbar hide ---- */
-    .no-scroll::-webkit-scrollbar { display: none; }
-    .no-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-
-    /* ---- Transitions ---- */
-    .card-lift { transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s ease; }
-    .card-lift:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
-
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      cursor: pointer;
+    /* Transitions — transform & opacity only */
+    .btn-primary {
       transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s ease;
     }
-    .btn:hover  { transform: translateY(-2px); opacity: .92; }
-    .btn:active { transform: translateY(0);    opacity: 1; }
-    .btn:focus-visible { outline: 2px solid #ff5200; outline-offset: 3px; }
+    .btn-primary:hover  { transform: translateY(-2px); opacity: .92; }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #C4A030; outline-offset: 3px; }
 
-    a { text-decoration: none; }
-
-    /* ---- Section headings ---- */
-    .section-label {
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #ff5200;
+    .btn-ghost {
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), background 0.18s ease;
     }
-    .section-title {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 900;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      line-height: 1.1;
+    .btn-ghost:hover  { transform: translateY(-2px); background: rgba(123,191,232,.08); }
+    .btn-ghost:active { transform: translateY(0); }
+    .btn-ghost:focus-visible { outline: 2px solid #7BBFE8; outline-offset: 3px; }
+
+    .card-lift {
+      transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px rgba(0,0,0,.45), 0 0 0 1px rgba(123,191,232,.12);
     }
 
-    /* ---- Star color ---- */
-    .stars { color: #ff8c00; }
+    .nav-link {
+      transition: color 0.18s ease;
+    }
+    .nav-link:hover { color: #fff; }
 
-    /* ---- Review card ---- */
-    .review-card {
-      background: #1c1c1c;
-      border: 1px solid #2a2a2a;
-      border-radius: 8px;
-      padding: 22px;
+    /* Layered radial gradients for depth */
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(30,49,71,.6) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(196,160,48,.06) 0%, transparent 55%),
+        #080F16;
     }
 
-    /* ---- Layered gradient backdrop on program cards ---- */
-    .card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.85) 30%, rgba(0,0,0,.1) 70%);
+    .section-bg-alt {
+      background:
+        radial-gradient(ellipse 70% 50% at 80% 50%, rgba(30,49,71,.4) 0%, transparent 60%),
+        #0C151E;
     }
 
-    /* ---- Noise texture overlay for depth ---- */
-    .noise::after {
+    /* SVG noise grain */
+    .grain::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
       pointer-events: none;
+      z-index: 0;
     }
 
-    /* ---- Progress bar accent ---- */
-    .accent-bar {
-      width: 48px;
-      height: 4px;
-      background: #ff5200;
-      border-radius: 2px;
-      margin-bottom: 16px;
-    }
-
-    /* ---- Radial glow behind big "30" text ---- */
-    .glow-radial {
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,82,0,.18) 0%, transparent 70%),
-        #000;
+    /* Checkmark list */
+    .check-item { display: flex; align-items: flex-start; gap: 10px; }
+    .check-icon {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      background: rgba(123,191,232,.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+      color: #7BBFE8;
+      font-size: 10px;
     }
   </style>
 </head>
 <body>
 
-<!-- =========================================================
+<!-- ==========================================================
      NAV
-     ========================================================= -->
-<nav style="position: sticky; top: 0; z-index: 50; background: #111; border-bottom: 1px solid #222;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 58px;">
+     ========================================================== -->
+<nav style="position: sticky; top: 0; z-index: 50; background: rgba(8,15,22,.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(45,64,85,.5);">
+  <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between;">
 
     <!-- Logo -->
-    <a href="#" style="font-size: 2rem; font-weight: 900; color: #fff; letter-spacing: -.03em; line-height: 1;">
-      FIT<span style="color:#ff5200;">PRO</span>
+    <a href="#" style="font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: #fff; letter-spacing: -0.01em; text-decoration: none; line-height: 1;">
+      FAT LOSS. <span style="color: #C4A030;">ON EASY MODE.</span>
     </a>
 
-    <!-- Nav links -->
-    <div style="display: flex; align-items: center; gap: 28px;">
-      <a href="#" style="color: #ccc; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; transition: color .2s ease;">Programs</a>
-      <a href="#" style="color: #ccc; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; transition: color .2s ease;">Trainers</a>
-      <a href="#" style="color: #ccc; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; transition: color .2s ease;">Nutrition</a>
-      <a href="#" style="color: #ccc; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; transition: color .2s ease;">Community</a>
+    <!-- Links -->
+    <div style="display: flex; align-items: center; gap: 32px;">
+      <a href="#programs" class="nav-link" style="color: #7BBFE8; font-size: 0.85rem; font-weight: 500; text-decoration: none;">Programs</a>
+      <a href="#resources" class="nav-link" style="color: #7BBFE8; font-size: 0.85rem; font-weight: 500; text-decoration: none;">Resources</a>
+      <a href="#community" class="nav-link" style="color: #7BBFE8; font-size: 0.85rem; font-weight: 500; text-decoration: none;">Community</a>
+      <a href="#programs" class="btn-primary" style="background: #C4A030; color: #080F16; padding: 8px 18px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; text-decoration: none; letter-spacing: 0.01em;">Work With Me</a>
     </div>
 
-    <!-- CTA -->
-    <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 22px; border-radius: 4px; font-size: 1.2rem;">Get Started</a>
   </div>
 </nav>
 
 
-<!-- =========================================================
-     PAGE HEADER + MOST POPULAR PROGRAMS
-     ========================================================= -->
-<section style="background: #0e0e0e; padding: 48px 0 44px;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
+<!-- ==========================================================
+     HERO
+     ========================================================== -->
+<section class="hero-bg grain" style="position: relative; padding: 96px 24px 88px; overflow: hidden;">
+  <div style="max-width: 1160px; margin: 0 auto; position: relative; z-index: 1;">
 
-    <!-- Header row -->
-    <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px;">
-      <div>
-        <p class="section-label" style="margin-bottom: 6px;">Browse Our Collection</p>
-        <h1 class="section-title">Most Popular Programs</h1>
-      </div>
-      <a href="#all-programs" style="color: #ff5200; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap;">View All &rarr;</a>
+    <!-- Label -->
+    <p style="font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: #C4A030; margin-bottom: 20px;">Fat Loss Coaching</p>
+
+    <!-- Headline -->
+    <h1 style="font-family: 'Manrope', sans-serif; font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 28px; max-width: 640px;">
+      <span style="display: block; font-size: clamp(3.2rem, 7vw, 5.5rem); color: #fff;">LOSE FAT.</span>
+      <span style="display: block; font-size: clamp(3.2rem, 7vw, 5.5rem); color: #C4A030;">KEEP YOUR LIFE.</span>
+      <span style="display: block; font-size: clamp(3.2rem, 7vw, 5.5rem); color: #fff;">NO B.S.</span>
+    </h1>
+
+    <!-- Body -->
+    <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; line-height: 1.7; color: #7BBFE8; max-width: 480px; margin-bottom: 36px; font-weight: 400;">
+      Most programs make fat loss harder than it needs to be. I'll show you how to drop the weight fast — without giving up the food, the social life, or the time you don't have.
+    </p>
+
+    <!-- CTAs -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 72px;">
+      <a href="#programs" class="btn-primary" style="background: #C4A030; color: #080F16; padding: 13px 26px; border-radius: 8px; font-size: 0.92rem; font-weight: 700; text-decoration: none; letter-spacing: 0.01em; box-shadow: 0 4px 24px rgba(196,160,48,.3);">
+        See Coaching Programs &rarr;
+      </a>
+      <a href="#resources" class="btn-ghost" style="color: #7BBFE8; padding: 13px 20px; border-radius: 8px; font-size: 0.92rem; font-weight: 500; text-decoration: none; border: 1px solid rgba(123,191,232,.2);">
+        Free Resources
+      </a>
     </div>
 
-    <!-- Horizontal scroll row -->
-    <div class="no-scroll" style="display: flex; gap: 18px; overflow-x: auto; padding-bottom: 6px;">
-
-      <!-- Card helper — 6 cards -->
-      <!-- Card 1 -->
-      <div class="card-lift" style="flex: 0 0 210px; background: #1c1c1c; border-radius: 8px; overflow: hidden; cursor: pointer; border: 1px solid #282828;">
-        <div style="position: relative;">
-          <img src="https://placehold.co/210x270/1c2233/cccccc?text=Fat+Burn+Elite" alt="Fat Burn Elite" style="width: 100%; display: block;">
-          <div class="card-overlay"></div>
-          <span style="position: absolute; top: 10px; left: 10px; background: #ff5200; color: #fff; font-size: 1rem; font-weight: 800; padding: 3px 9px; border-radius: 3px; text-transform: uppercase; letter-spacing: .04em;">BESTSELLER</span>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.3rem; font-weight: 700; line-height: 1.2;">Fat Burn Elite</p>
-          </div>
-        </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #777; font-size: 1.15rem; line-height: 1.45; margin-bottom: 9px;">12-week transformation</p>
-          <div class="stars" style="font-size: 1.1rem;">★★★★★ <span style="color: #666;">(2,411)</span></div>
-        </div>
+    <!-- Stats -->
+    <div style="display: flex; align-items: center; gap: 0; flex-wrap: wrap;">
+      <div style="padding-right: 36px; border-right: 1px solid rgba(45,64,85,.8);">
+        <p style="font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 4px;">200+</p>
+        <p style="font-size: 0.78rem; color: #5C7080; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;">Clients Transformed</p>
       </div>
-
-      <!-- Card 2 -->
-      <div class="card-lift" style="flex: 0 0 210px; background: #1c1c1c; border-radius: 8px; overflow: hidden; cursor: pointer; border: 1px solid #282828;">
-        <div style="position: relative;">
-          <img src="https://placehold.co/210x270/1e1a2e/cccccc?text=8+Week+Shred" alt="8 Week Shred" style="width: 100%; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.3rem; font-weight: 700; line-height: 1.2;">8 Week Shred</p>
-          </div>
-        </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #777; font-size: 1.15rem; line-height: 1.45; margin-bottom: 9px;">Intense 8-week cutting</p>
-          <div class="stars" style="font-size: 1.1rem;">★★★★★ <span style="color: #666;">(1,822)</span></div>
-        </div>
+      <div style="padding: 0 36px; border-right: 1px solid rgba(45,64,85,.8);">
+        <p style="font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 4px;">4,800+</p>
+        <p style="font-size: 0.78rem; color: #5C7080; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;">Program Followers</p>
       </div>
-
-      <!-- Card 3 -->
-      <div class="card-lift" style="flex: 0 0 210px; background: #1c1c1c; border-radius: 8px; overflow: hidden; cursor: pointer; border: 1px solid #282828;">
-        <div style="position: relative;">
-          <img src="https://placehold.co/210x270/1a2b1a/cccccc?text=Muscle+Builder+Pro" alt="Muscle Builder Pro" style="width: 100%; display: block;">
-          <div class="card-overlay"></div>
-          <span style="position: absolute; top: 10px; left: 10px; background: #27ae60; color: #fff; font-size: 1rem; font-weight: 800; padding: 3px 9px; border-radius: 3px; text-transform: uppercase; letter-spacing: .04em;">NEW</span>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.3rem; font-weight: 700; line-height: 1.2;">Muscle Builder Pro</p>
-          </div>
-        </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #777; font-size: 1.15rem; line-height: 1.45; margin-bottom: 9px;">16-week mass builder</p>
-          <div class="stars" style="font-size: 1.1rem;">★★★★★ <span style="color: #666;">(987)</span></div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="card-lift" style="flex: 0 0 210px; background: #1c1c1c; border-radius: 8px; overflow: hidden; cursor: pointer; border: 1px solid #282828;">
-        <div style="position: relative;">
-          <img src="https://placehold.co/210x270/2b1a1a/cccccc?text=Keto+Fat+Loss" alt="Keto Fat Loss" style="width: 100%; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.3rem; font-weight: 700; line-height: 1.2;">Keto Fat Loss</p>
-          </div>
-        </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #777; font-size: 1.15rem; line-height: 1.45; margin-bottom: 9px;">Nutrition + training combo</p>
-          <div class="stars" style="font-size: 1.1rem;">★★★★☆ <span style="color: #666;">(1,204)</span></div>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="card-lift" style="flex: 0 0 210px; background: #1c1c1c; border-radius: 8px; overflow: hidden; cursor: pointer; border: 1px solid #282828;">
-        <div style="position: relative;">
-          <img src="https://placehold.co/210x270/1a1a2b/cccccc?text=Core+%26+Cardio" alt="Core & Cardio" style="width: 100%; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.3rem; font-weight: 700; line-height: 1.2;">Core & Cardio Blast</p>
-          </div>
-        </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #777; font-size: 1.15rem; line-height: 1.45; margin-bottom: 9px;">4-week abs & endurance</p>
-          <div class="stars" style="font-size: 1.1rem;">★★★★★ <span style="color: #666;">(3,155)</span></div>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="card-lift" style="flex: 0 0 210px; background: #1c1c1c; border-radius: 8px; overflow: hidden; cursor: pointer; border: 1px solid #282828;">
-        <div style="position: relative;">
-          <img src="https://placehold.co/210x270/251a1a/cccccc?text=Total+Body" alt="Total Body" style="width: 100%; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.3rem; font-weight: 700; line-height: 1.2;">Total Body Transform</p>
-          </div>
-        </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #777; font-size: 1.15rem; line-height: 1.45; margin-bottom: 9px;">Complete 24-week overhaul</p>
-          <div class="stars" style="font-size: 1.1rem;">★★★★★ <span style="color: #666;">(4,709)</span></div>
-        </div>
-      </div>
-
-    </div><!-- end scroll row -->
-  </div>
-</section>
-
-
-<!-- =========================================================
-     CTA BANNER — "WANT TO FAST-TRACK YOUR PROGRESS?"
-     ========================================================= -->
-<section style="position: relative; background: #0f0f0f; border-top: 2px solid #ff5200; border-bottom: 1px solid #242424; overflow: hidden;">
-  <!-- Radial glow -->
-  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 50% 140% at 60% 50%, rgba(255,82,0,.1) 0%, transparent 65%); pointer-events: none;"></div>
-
-  <div style="max-width: 1240px; margin: 0 auto; display: flex; align-items: stretch; position: relative;">
-
-    <!-- Left: person image -->
-    <div style="flex: 0 0 280px; position: relative; overflow: hidden; display: flex; align-items: flex-end;">
-      <img src="https://placehold.co/280x220/1c2233/aaaaaa?text=Trainer+Photo" alt="Trainer" style="width: 100%; display: block; object-fit: cover; filter: contrast(1.1);">
-      <div style="position: absolute; inset: 0; background: linear-gradient(to right, transparent 60%, #0f0f0f 100%);"></div>
-    </div>
-
-    <!-- Right: text + CTA -->
-    <div style="flex: 1; padding: 40px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
-      <div>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-          <span class="stars" style="font-size: 1.4rem;">★★★★★</span>
-          <span style="color: #888; font-size: 1.15rem; font-weight: 600;">Trusted by 200,000+ Members</span>
-        </div>
-        <h2 style="font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: .03em; line-height: 1.2;">
-          Want to Fast-Track Your Progress?<br>
-          <span style="color: #ff5200;">Join FitPro Elite</span>
-        </h2>
-        <p style="color: #888; font-size: 1.25rem; margin-top: 8px; max-width: 440px; line-height: 1.6;">Get access to all programs, exclusive content, and personalized coaching in one place.</p>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-        <a href="#" class="btn" style="background: #27ae60; color: #fff; padding: 14px 30px; border-radius: 4px; font-size: 1.3rem; white-space: nowrap; box-shadow: 0 4px 20px rgba(39,174,96,.35);">
-          Claim Your Free Supplement Guide &rarr;
-        </a>
-        <p style="color: #555; font-size: 1.1rem; padding-left: 4px;">No credit card required &middot; Cancel anytime</p>
+      <div style="padding-left: 36px;">
+        <p style="font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 4px;">98%</p>
+        <p style="font-size: 0.78rem; color: #5C7080; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;">Client Satisfaction</p>
       </div>
     </div>
 
@@ -290,314 +182,153 @@
 </section>
 
 
-<!-- =========================================================
-     ALL PROGRAMS GRID
-     ========================================================= -->
-<section id="all-programs" style="background: #0a0a0a; padding: 64px 0;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
+<!-- ==========================================================
+     PROBLEM / SYSTEM SECTION
+     ========================================================== -->
+<section style="background: #0C151E; padding: 88px 24px; border-top: 1px solid rgba(45,64,85,.4);">
+  <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
 
-    <div style="margin-bottom: 36px;">
-      <p class="section-label" style="margin-bottom: 8px;">Complete Catalog</p>
-      <div class="accent-bar"></div>
-      <h2 class="section-title">All Programs</h2>
+    <!-- Left: problem copy -->
+    <div>
+      <p style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: #C4A030; margin-bottom: 16px;">Why Most Diets Fail</p>
+      <h2 style="font-family: 'Manrope', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 20px;">
+        You didn't fail the diet.<br>The diet failed you.
+      </h2>
+      <p style="font-size: 0.95rem; line-height: 1.75; color: #5C7080; margin-bottom: 16px;">
+        Every time you white-knuckle a meal plan you hate, the weight comes off — then comes right back. That's not a willpower problem — it's a bad system.
+      </p>
+      <p style="font-size: 0.95rem; line-height: 1.75; color: #5C7080; margin-bottom: 32px;">
+        Sustainable fat loss doesn't come from eating less and suffering more. It comes from building a system that actually fits your life.
+      </p>
+      <a href="#programs" class="btn-primary" style="display: inline-block; background: #C4A030; color: #080F16; padding: 12px 24px; border-radius: 8px; font-size: 0.88rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 20px rgba(196,160,48,.25);">
+        Fix the System &rarr;
+      </a>
     </div>
 
-    <!-- 4-col grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px;">
+    <!-- Right: objection cards -->
+    <div style="display: flex; flex-direction: column; gap: 12px;">
 
-      <!-- Program Card macro -->
-      <!-- 1: Fat Burn Elite -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="https://placehold.co/400x200/1c2233/cccccc?text=Fat+Burn+Elite" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="card-overlay"></div>
-          <span style="position: absolute; top: 10px; left: 10px; background: #ff5200; color: #fff; font-size: 1rem; font-weight: 800; padding: 3px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: .04em;">BESTSELLER</span>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.4rem; font-weight: 800;">Fat Burn Elite</p>
-            <div class="stars" style="font-size: 1.05rem; margin-top: 3px;">★★★★★ <span style="color: #666;">(2,411)</span></div>
-          </div>
-        </div>
-        <div style="padding: 16px 18px 18px;">
-          <p style="color: #888; font-size: 1.2rem; line-height: 1.55; margin-bottom: 14px;">12-week fat loss program with full nutrition guide and progressive workout plans.</p>
-          <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 18px; border-radius: 4px; font-size: 1.1rem;">Get Started &rarr;</a>
-        </div>
+      <div style="background: #1E3147; border: 1px solid rgba(45,64,85,.6); border-radius: 10px; padding: 20px 22px;">
+        <p style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: #7BBFE8; margin-bottom: 8px;">&#9656; Sustainable by design</p>
+        <p style="font-size: 0.9rem; color: #5C7080; line-height: 1.6;">We build sustainable habits — not a diet you survive for 30 days.</p>
       </div>
 
-      <!-- 2: 8 Week Shred -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="https://placehold.co/400x200/1e1a2e/cccccc?text=8+Week+Shred" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.4rem; font-weight: 800;">8 Week Shred Challenge</p>
-            <div class="stars" style="font-size: 1.05rem; margin-top: 3px;">★★★★★ <span style="color: #666;">(1,822)</span></div>
-          </div>
-        </div>
-        <div style="padding: 16px 18px 18px;">
-          <p style="color: #888; font-size: 1.2rem; line-height: 1.55; margin-bottom: 14px;">Intense 8-week program designed to strip away body fat fast while preserving lean muscle.</p>
-          <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 18px; border-radius: 4px; font-size: 1.1rem;">Get Started &rarr;</a>
-        </div>
+      <div style="background: #1E3147; border: 1px solid rgba(45,64,85,.6); border-radius: 10px; padding: 20px 22px;">
+        <p style="font-size: 0.88rem; font-weight: 600; color: #fff; margin-bottom: 6px; font-style: italic;">"I refuse to give up food I love."</p>
+        <p style="font-size: 0.9rem; color: #5C7080; line-height: 1.6;">You won't have to. That's literally the point of this approach.</p>
       </div>
 
-      <!-- 3: Muscle Builder Pro -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="https://placehold.co/400x200/1a2b1a/cccccc?text=Muscle+Builder+Pro" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="card-overlay"></div>
-          <span style="position: absolute; top: 10px; left: 10px; background: #27ae60; color: #fff; font-size: 1rem; font-weight: 800; padding: 3px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: .04em;">NEW</span>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.4rem; font-weight: 800;">Muscle Builder Pro</p>
-            <div class="stars" style="font-size: 1.05rem; margin-top: 3px;">★★★★★ <span style="color: #666;">(987)</span></div>
-          </div>
-        </div>
-        <div style="padding: 16px 18px 18px;">
-          <p style="color: #888; font-size: 1.2rem; line-height: 1.55; margin-bottom: 14px;">Build serious mass with progressive overload training and a customized bulk diet plan.</p>
-          <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 18px; border-radius: 4px; font-size: 1.1rem;">Get Started &rarr;</a>
-        </div>
+      <div style="background: #1E3147; border: 1px solid rgba(45,64,85,.6); border-radius: 10px; padding: 20px 22px;">
+        <p style="font-size: 0.88rem; font-weight: 600; color: #fff; margin-bottom: 6px; font-style: italic;">"I don't have time for complicated meal prep."</p>
+        <p style="font-size: 0.9rem; color: #5C7080; line-height: 1.6;">Good — because we don't do complicated. Simple, flexible, real-life food.</p>
       </div>
 
-      <!-- 4: Keto Fat Loss -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="https://placehold.co/400x200/2b1a1a/cccccc?text=Keto+Fat+Loss" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.4rem; font-weight: 800;">Keto Fat Loss System</p>
-            <div class="stars" style="font-size: 1.05rem; margin-top: 3px;">★★★★☆ <span style="color: #666;">(1,204)</span></div>
-          </div>
-        </div>
-        <div style="padding: 16px 18px 18px;">
-          <p style="color: #888; font-size: 1.2rem; line-height: 1.55; margin-bottom: 14px;">Ketogenic nutrition plan with complementary workout program for rapid fat loss.</p>
-          <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 18px; border-radius: 4px; font-size: 1.1rem;">Get Started &rarr;</a>
-        </div>
-      </div>
-
-      <!-- 5: Core & Cardio -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="https://placehold.co/400x200/1a1a2b/cccccc?text=Core+%26+Cardio" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.4rem; font-weight: 800;">Core & Cardio Blast</p>
-            <div class="stars" style="font-size: 1.05rem; margin-top: 3px;">★★★★★ <span style="color: #666;">(3,155)</span></div>
-          </div>
-        </div>
-        <div style="padding: 16px 18px 18px;">
-          <p style="color: #888; font-size: 1.2rem; line-height: 1.55; margin-bottom: 14px;">4-week intensive core and cardiovascular conditioning — 30 minutes a day, zero equipment.</p>
-          <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 18px; border-radius: 4px; font-size: 1.1rem;">Get Started &rarr;</a>
-        </div>
-      </div>
-
-      <!-- 6: Total Body Transform -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="https://placehold.co/400x200/251a1a/cccccc?text=Total+Body" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.4rem; font-weight: 800;">Total Body Transform</p>
-            <div class="stars" style="font-size: 1.05rem; margin-top: 3px;">★★★★★ <span style="color: #666;">(4,709)</span></div>
-          </div>
-        </div>
-        <div style="padding: 16px 18px 18px;">
-          <p style="color: #888; font-size: 1.2rem; line-height: 1.55; margin-bottom: 14px;">Complete 24-week program combining strength, cardio, and nutrition for a total overhaul.</p>
-          <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 18px; border-radius: 4px; font-size: 1.1rem;">Get Started &rarr;</a>
-        </div>
-      </div>
-
-      <!-- 7: Beginner's Blueprint -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="https://placehold.co/400x200/1a251a/cccccc?text=Beginners+Blueprint" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.4rem; font-weight: 800;">Beginner's Blueprint</p>
-            <div class="stars" style="font-size: 1.05rem; margin-top: 3px;">★★★★★ <span style="color: #666;">(6,031)</span></div>
-          </div>
-        </div>
-        <div style="padding: 16px 18px 18px;">
-          <p style="color: #888; font-size: 1.2rem; line-height: 1.55; margin-bottom: 14px;">Start your fitness journey with this structured 6-week beginner-friendly plan.</p>
-          <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 18px; border-radius: 4px; font-size: 1.1rem;">Get Started &rarr;</a>
-        </div>
-      </div>
-
-      <!-- 8: Clean Bulk System -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="position: relative; height: 200px; overflow: hidden;">
-          <img src="https://placehold.co/400x200/1e2822/cccccc?text=Clean+Bulk" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="card-overlay"></div>
-          <div style="position: absolute; bottom: 10px; left: 12px; right: 12px;">
-            <p style="color: #fff; font-size: 1.4rem; font-weight: 800;">Clean Bulk System</p>
-            <div class="stars" style="font-size: 1.05rem; margin-top: 3px;">★★★★★ <span style="color: #666;">(743)</span></div>
-          </div>
-        </div>
-        <div style="padding: 16px 18px 18px;">
-          <p style="color: #888; font-size: 1.2rem; line-height: 1.55; margin-bottom: 14px;">Gain lean muscle without adding fat with this 12-week clean bulk protocol.</p>
-          <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 9px 18px; border-radius: 4px; font-size: 1.1rem;">Get Started &rarr;</a>
-        </div>
+      <div style="background: #1E3147; border: 1px solid rgba(45,64,85,.6); border-radius: 10px; padding: 20px 22px;">
+        <p style="font-size: 0.88rem; font-weight: 600; color: #fff; margin-bottom: 6px; font-style: italic;">"I've tried everything and nothing sticks."</p>
+        <p style="font-size: 0.9rem; color: #5C7080; line-height: 1.6;">That means you've been using someone else's system. This one is built around you.</p>
       </div>
 
     </div>
+
   </div>
 </section>
 
 
-<!-- =========================================================
-     30-DAY CHALLENGE
-     ========================================================= -->
-<section class="glow-radial noise" style="position: relative; padding: 88px 24px; text-align: center; border-top: 3px solid #ff5200;">
-  <div style="max-width: 720px; margin: 0 auto; position: relative; z-index: 1;">
-    <p class="section-label" style="margin-bottom: 14px; display: block;">Limited Time Challenge</p>
-    <h2 style="font-size: clamp(6rem, 12vw, 10rem); font-weight: 900; color: #fff; line-height: .9; letter-spacing: -.04em; margin-bottom: 0;">30-</h2>
-    <h2 style="font-size: clamp(6rem, 12vw, 10rem); font-weight: 900; color: #fff; line-height: .9; letter-spacing: -.04em; margin-bottom: 20px;">DAY</h2>
-    <h3 style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; color: #ff5200; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 20px;">Fat Burn Accelerator</h3>
-    <p style="color: #888; font-size: 1.4rem; line-height: 1.75; max-width: 540px; margin: 0 auto 36px;">A 30-day challenge designed to jumpstart your metabolism, strip away fat, and build lean muscle — all in just 30 minutes a day, no gym required.</p>
-    <a href="#" class="btn" style="background: #ff5200; color: #fff; padding: 16px 44px; border-radius: 4px; font-size: 1.35rem; box-shadow: 0 6px 28px rgba(255,82,0,.4);">Join the Challenge &rarr;</a>
-  </div>
-</section>
-
-
-<!-- =========================================================
-     5-STAR REVIEWS
-     ========================================================= -->
-<section style="background: #0e0e0e; padding: 64px 0;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
+<!-- ==========================================================
+     1-ON-1 COACHING / PROGRAMS
+     ========================================================== -->
+<section id="programs" class="section-bg-alt grain" style="position: relative; padding: 96px 24px; border-top: 1px solid rgba(45,64,85,.4); overflow: hidden;">
+  <div style="max-width: 1160px; margin: 0 auto; position: relative; z-index: 1;">
 
     <!-- Header -->
-    <div style="text-align: center; margin-bottom: 44px;">
-      <div class="stars" style="font-size: 2.4rem; margin-bottom: 12px; display: block;">★★★★★</div>
-      <h2 class="section-title">FitPro Has Tons of 5-Star Reviews</h2>
-      <p style="color: #666; font-size: 1.25rem; margin-top: 8px;">Over 50,000 verified customer reviews</p>
+    <div style="text-align: center; margin-bottom: 56px;">
+      <p style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: #C4A030; margin-bottom: 14px;">1-On-1 Private Coaching</p>
+      <h2 style="font-family: 'Manrope', sans-serif; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px;">
+        <span style="color: #fff;">Direct. Personal. </span><span style="color: #C4A030;">Results.</span>
+      </h2>
+      <p style="font-size: 0.95rem; color: #5C7080; line-height: 1.7; max-width: 420px; margin: 0 auto;">
+        No templates. No generic plans. Everything built around you, your life, and your goals.
+      </p>
     </div>
 
-    <!-- Review grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px;">
+    <!-- Pricing cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 840px; margin: 0 auto;">
 
-      <div class="review-card">
-        <div class="stars" style="font-size: 1.2rem; margin-bottom: 12px;">★★★★★</div>
-        <p style="color: #ccc; font-size: 1.25rem; line-height: 1.65; margin-bottom: 14px;">"I lost 22 lbs in 12 weeks on the Fat Burn Elite program. The meal plans are simple and the workouts are genuinely challenging but doable."</p>
-        <p style="color: #666; font-size: 1.1rem; font-weight: 700;">Sarah M. &middot; Verified Purchase</p>
-      </div>
+      <!-- STARTER -->
+      <div class="card-lift" style="background: #1E3147; border: 1px solid rgba(45,64,85,.7); border-radius: 14px; padding: 36px; position: relative;">
+        <span style="display: inline-block; background: rgba(123,191,232,.12); color: #7BBFE8; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; padding: 4px 10px; border-radius: 4px; margin-bottom: 24px;">Starter</span>
 
-      <div class="review-card">
-        <div class="stars" style="font-size: 1.2rem; margin-bottom: 12px;">★★★★★</div>
-        <p style="color: #ccc; font-size: 1.25rem; line-height: 1.65; margin-bottom: 14px;">"Best investment in my health. The 8 Week Shred absolutely worked. I can finally see my abs for the first time in my adult life."</p>
-        <p style="color: #666; font-size: 1.1rem; font-weight: 700;">Mike T. &middot; Verified Purchase</p>
-      </div>
+        <div style="margin-bottom: 6px;">
+          <span style="font-family: 'Manrope', sans-serif; font-size: 3.2rem; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -0.03em;">$500</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #5C7080; margin-bottom: 28px;">per month &middot; 1 month minimum</p>
 
-      <div class="review-card">
-        <div class="stars" style="font-size: 1.2rem; margin-bottom: 12px;">★★★★★</div>
-        <p style="color: #ccc; font-size: 1.25rem; line-height: 1.65; margin-bottom: 14px;">"Muscle Builder Pro is no joke. Gained 15 lbs of lean muscle in 16 weeks. The progressive overload structure is exactly what I needed."</p>
-        <p style="color: #666; font-size: 1.1rem; font-weight: 700;">James K. &middot; Verified Purchase</p>
-      </div>
+        <p style="font-size: 0.88rem; font-weight: 600; color: #fff; margin-bottom: 16px;">Weekly Video Coaching</p>
 
-      <div class="review-card">
-        <div class="stars" style="font-size: 1.2rem; margin-bottom: 12px;">★★★★★</div>
-        <p style="color: #ccc; font-size: 1.25rem; line-height: 1.65; margin-bottom: 14px;">"Was skeptical but after 8 weeks I'm a complete believer. Down 18 lbs and my energy levels are through the roof. Highly recommend."</p>
-        <p style="color: #666; font-size: 1.1rem; font-weight: 700;">Lisa R. &middot; Verified Purchase</p>
-      </div>
-
-      <div class="review-card">
-        <div class="stars" style="font-size: 1.2rem; margin-bottom: 12px;">★★★★★</div>
-        <p style="color: #ccc; font-size: 1.25rem; line-height: 1.65; margin-bottom: 14px;">"The Core & Cardio program destroyed me in the best way possible. Lost 2 inches off my waist in just 4 weeks. Easy to follow too."</p>
-        <p style="color: #666; font-size: 1.1rem; font-weight: 700;">Chris W. &middot; Verified Purchase</p>
-      </div>
-
-      <div class="review-card">
-        <div class="stars" style="font-size: 1.2rem; margin-bottom: 12px;">★★★★★</div>
-        <p style="color: #ccc; font-size: 1.25rem; line-height: 1.65; margin-bottom: 14px;">"Started with the Beginner's Blueprint and I'm already on my second program. The progression is perfectly laid out. Changed my life."</p>
-        <p style="color: #666; font-size: 1.1rem; font-weight: 700;">Amanda J. &middot; Verified Purchase</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- =========================================================
-     AMAZING SUCCESS STORIES
-     ========================================================= -->
-<section style="background: #111; padding: 64px 0; border-top: 1px solid #1e1e1e;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
-
-    <div style="text-align: center; margin-bottom: 44px;">
-      <p class="section-label" style="margin-bottom: 8px;">Real People. Real Results.</p>
-      <div class="accent-bar" style="margin: 0 auto 16px;"></div>
-      <h2 class="section-title">Amazing Success Stories</h2>
-    </div>
-
-    <!-- Before/after grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px;">
-
-      <!-- Story 1 -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px;">
-          <div style="position: relative;">
-            <img src="https://placehold.co/220x260/2a1a1a/777777?text=Before" alt="Before" style="width: 100%; display: block;">
-            <span style="position: absolute; bottom: 7px; left: 7px; background: rgba(0,0,0,.7); color: #fff; font-size: 1rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;">Before</span>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;">1 weekly video call (45–60 min) for 4 weeks</p>
           </div>
-          <div style="position: relative;">
-            <img src="https://placehold.co/220x260/1a2a1a/777777?text=After" alt="After" style="width: 100%; display: block;">
-            <span style="position: absolute; bottom: 7px; left: 7px; background: #27ae60; color: #fff; font-size: 1rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;">After</span>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;">Custom nutrition strategy built around your schedule</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;">Weekly progress review &amp; plan adjustments</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;">Personalized workout plan with form guidance</p>
           </div>
         </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #fff; font-size: 1.3rem; font-weight: 800; margin-bottom: 3px;">Lost 28 lbs in 12 Weeks</p>
-          <p style="color: #666; font-size: 1.1rem;">Fat Burn Elite Program</p>
-        </div>
+
+        <a href="#" class="btn-ghost" style="display: block; text-align: center; color: #7BBFE8; padding: 13px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(123,191,232,.25);">
+          Get Started &rarr;
+        </a>
       </div>
 
-      <!-- Story 2 -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px;">
-          <div style="position: relative;">
-            <img src="https://placehold.co/220x260/1a1a2a/777777?text=Before" alt="Before" style="width: 100%; display: block;">
-            <span style="position: absolute; bottom: 7px; left: 7px; background: rgba(0,0,0,.7); color: #fff; font-size: 1rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;">Before</span>
-          </div>
-          <div style="position: relative;">
-            <img src="https://placehold.co/220x260/1a2a22/777777?text=After" alt="After" style="width: 100%; display: block;">
-            <span style="position: absolute; bottom: 7px; left: 7px; background: #27ae60; color: #fff; font-size: 1rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;">After</span>
-          </div>
-        </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #fff; font-size: 1.3rem; font-weight: 800; margin-bottom: 3px;">Gained 14 lbs Lean Muscle</p>
-          <p style="color: #666; font-size: 1.1rem;">Muscle Builder Pro</p>
-        </div>
-      </div>
+      <!-- ELITE -->
+      <div class="card-lift" style="background: #1E3147; border: 1px solid rgba(196,160,48,.35); border-radius: 14px; padding: 36px; position: relative; box-shadow: 0 0 0 1px rgba(196,160,48,.12), 0 16px 48px rgba(0,0,0,.3);">
+        <!-- Most Popular badge -->
+        <div style="position: absolute; top: -1px; right: 24px; background: #C4A030; color: #080F16; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; padding: 5px 12px; border-radius: 0 0 8px 8px;">Most Popular</div>
 
-      <!-- Story 3 -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px;">
-          <div style="position: relative;">
-            <img src="https://placehold.co/220x260/251a1a/777777?text=Before" alt="Before" style="width: 100%; display: block;">
-            <span style="position: absolute; bottom: 7px; left: 7px; background: rgba(0,0,0,.7); color: #fff; font-size: 1rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;">Before</span>
-          </div>
-          <div style="position: relative;">
-            <img src="https://placehold.co/220x260/1a2518/777777?text=After" alt="After" style="width: 100%; display: block;">
-            <span style="position: absolute; bottom: 7px; left: 7px; background: #27ae60; color: #fff; font-size: 1rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;">After</span>
-          </div>
-        </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #fff; font-size: 1.3rem; font-weight: 800; margin-bottom: 3px;">Shredded 35 lbs of Fat</p>
-          <p style="color: #666; font-size: 1.1rem;">8 Week Shred Challenge</p>
-        </div>
-      </div>
+        <span style="display: inline-block; background: rgba(196,160,48,.12); color: #C4A030; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; padding: 4px 10px; border-radius: 4px; margin-bottom: 24px;">Elite</span>
 
-      <!-- Story 4 -->
-      <div class="card-lift" style="background: #1c1c1c; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; cursor: pointer;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px;">
-          <div style="position: relative;">
-            <img src="https://placehold.co/220x260/1e1a2e/777777?text=Before" alt="Before" style="width: 100%; display: block;">
-            <span style="position: absolute; bottom: 7px; left: 7px; background: rgba(0,0,0,.7); color: #fff; font-size: 1rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;">Before</span>
+        <div style="margin-bottom: 6px;">
+          <span style="font-family: 'Manrope', sans-serif; font-size: 3.2rem; font-weight: 800; color: #C4A030; line-height: 1; letter-spacing: -0.03em;">$2,000</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #5C7080; margin-bottom: 28px;">per month &middot; 1 month minimum</p>
+
+        <p style="font-size: 0.88rem; font-weight: 600; color: #fff; margin-bottom: 16px;">Full Daily Access Coaching</p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">
+          <div class="check-item">
+            <div class="check-icon" style="background: rgba(196,160,48,.15); color: #C4A030;">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;"><span style="color: #7BBFE8; font-weight: 600;">Everything in Starter, plus:</span></p>
           </div>
-          <div style="position: relative;">
-            <img src="https://placehold.co/220x260/1a2a1a/777777?text=After" alt="After" style="width: 100%; display: block;">
-            <span style="position: absolute; bottom: 7px; left: 7px; background: #27ae60; color: #fff; font-size: 1rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;">After</span>
+          <div class="check-item">
+            <div class="check-icon" style="background: rgba(196,160,48,.15); color: #C4A030;">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;"><span style="color: #fff; font-weight: 500;">Daily voice messages</span> — 5–10 back-and-forths per day</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon" style="background: rgba(196,160,48,.15); color: #C4A030;">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;">Real-time answers to every question, every single day</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon" style="background: rgba(196,160,48,.15); color: #C4A030;">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;">Meal plan updated weekly based on your feedback</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon" style="background: rgba(196,160,48,.15); color: #C4A030;">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080; line-height: 1.5;">Priority response — never wait more than a few hours</p>
           </div>
         </div>
-        <div style="padding: 13px 14px 15px;">
-          <p style="color: #fff; font-size: 1.3rem; font-weight: 800; margin-bottom: 3px;">Complete 90-Day Transformation</p>
-          <p style="color: #666; font-size: 1.1rem;">Total Body Transform</p>
-        </div>
+
+        <a href="#" class="btn-primary" style="display: block; text-align: center; background: #C4A030; color: #080F16; padding: 13px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 20px rgba(196,160,48,.25);">
+          Apply for Elite &rarr;
+        </a>
       </div>
 
     </div>
@@ -605,48 +336,74 @@
 </section>
 
 
-<!-- =========================================================
-     MORE WAYS TO REACH YOUR FITNESS GOALS
-     ========================================================= -->
-<section style="background: #0a0a0a; padding: 64px 0; border-top: 1px solid #1a1a1a;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
+<!-- ==========================================================
+     COMMUNITY — LEANMAXX UNIVERSITY
+     ========================================================== -->
+<section id="community" style="background: #080F16; padding: 96px 24px; border-top: 1px solid rgba(45,64,85,.4);">
+  <div style="max-width: 1160px; margin: 0 auto;">
 
-    <div style="text-align: center; margin-bottom: 44px;">
-      <h2 class="section-title">More Ways to Reach Your Fitness Goals</h2>
-    </div>
+    <!-- Card -->
+    <div style="background: #0C151E; border: 1px solid rgba(45,64,85,.5); border-radius: 16px; padding: 56px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: start;">
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px;">
+      <!-- Left -->
+      <div>
+        <h2 style="font-family: 'Manrope', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 4px;">Join LeanMaxx University.</h2>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #7BBFE8; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 24px;">It's completely free.</h3>
 
-      <!-- Card: Meal Plans -->
-      <div class="card-lift" style="background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 8px; padding: 28px; cursor: pointer;">
-        <div style="width: 48px; height: 48px; background: rgba(255,82,0,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 2.2rem;">🥗</div>
-        <h3 style="color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">Custom Meal Plans</h3>
-        <p style="color: #777; font-size: 1.2rem; line-height: 1.65; margin-bottom: 18px;">Get a fully personalized meal plan built around your body, goals, and food preferences.</p>
-        <a href="#" style="color: #ff5200; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; transition: opacity .2s ease;">Learn More &rarr;</a>
+        <p style="font-size: 0.92rem; line-height: 1.75; color: #5C7080; max-width: 480px; margin-bottom: 32px;">
+          My growing community of people cutting fat the smart way. Weekly training, live Q&amp;As, accountability groups, meal ideas, and the support most programs charge $500/month for — completely free on Skool.
+        </p>
+
+        <!-- Mini stats -->
+        <div style="display: flex; align-items: stretch; gap: 0; margin-bottom: 36px; flex-wrap: wrap;">
+          <div style="padding-right: 28px; border-right: 1px solid rgba(45,64,85,.7);">
+            <p style="font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 800; color: #7BBFE8; line-height: 1; margin-bottom: 4px;">Free</p>
+            <p style="font-size: 0.75rem; color: #5C7080; font-weight: 500;">Always &amp; forever</p>
+          </div>
+          <div style="padding: 0 28px; border-right: 1px solid rgba(45,64,85,.7);">
+            <p style="font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 800; color: #7BBFE8; line-height: 1; margin-bottom: 4px;">Live Q&amp;As</p>
+            <p style="font-size: 0.75rem; color: #5C7080; font-weight: 500;">Weekly sessions</p>
+          </div>
+          <div style="padding-left: 28px;">
+            <p style="font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 800; color: #7BBFE8; line-height: 1; margin-bottom: 4px;">Daily</p>
+            <p style="font-size: 0.75rem; color: #5C7080; font-weight: 500;">Active community</p>
+          </div>
+        </div>
+
+        <a href="#" class="btn-ghost" style="display: inline-block; background: rgba(123,191,232,.08); color: #7BBFE8; padding: 13px 24px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(123,191,232,.2);">
+          Join the Community &rarr;
+        </a>
       </div>
 
-      <!-- Card: Free Guides -->
-      <div class="card-lift" style="background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 8px; padding: 28px; cursor: pointer;">
-        <div style="width: 48px; height: 48px; background: rgba(255,82,0,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 2.2rem;">💪</div>
-        <h3 style="color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">Free Training Guides</h3>
-        <p style="color: #777; font-size: 1.2rem; line-height: 1.65; margin-bottom: 18px;">Download free beginner and advanced workout guides and start seeing results today.</p>
-        <a href="#" style="color: #ff5200; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; transition: opacity .2s ease;">Download Free &rarr;</a>
-      </div>
-
-      <!-- Card: Community -->
-      <div class="card-lift" style="background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 8px; padding: 28px; cursor: pointer;">
-        <div style="width: 48px; height: 48px; background: rgba(255,82,0,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 2.2rem;">👥</div>
-        <h3 style="color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">FitPro Community</h3>
-        <p style="color: #777; font-size: 1.2rem; line-height: 1.65; margin-bottom: 18px;">Join 200,000+ members sharing results, recipes, and daily motivation — completely free.</p>
-        <a href="#" style="color: #ff5200; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; transition: opacity .2s ease;">Join Free &rarr;</a>
-      </div>
-
-      <!-- Card: App -->
-      <div class="card-lift" style="background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 8px; padding: 28px; cursor: pointer;">
-        <div style="width: 48px; height: 48px; background: rgba(255,82,0,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 2.2rem;">📱</div>
-        <h3 style="color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">FitPro App</h3>
-        <p style="color: #777; font-size: 1.2rem; line-height: 1.65; margin-bottom: 18px;">Track workouts, log meals, and access every program from your phone or tablet.</p>
-        <a href="#" style="color: #ff5200; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; transition: opacity .2s ease;">Get the App &rarr;</a>
+      <!-- Right: inside the community card -->
+      <div style="background: #1E3147; border: 1px solid rgba(45,64,85,.6); border-radius: 12px; padding: 28px 28px 32px; min-width: 240px;">
+        <p style="font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: #7BBFE8; margin-bottom: 20px;">Inside the Community</p>
+        <div style="display: flex; flex-direction: column; gap: 13px;">
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080;">Fat loss education</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080;">Meal ideas &amp; recipes</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080;">Weekly live sessions</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080;">Accountability groups</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080;">Member-only guides</p>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <p style="font-size: 0.87rem; color: #5C7080;">Direct Q&amp;A access</p>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -654,81 +411,109 @@
 </section>
 
 
-<!-- =========================================================
-     FOOTER BRAND BANNER (green brand section)
-     ========================================================= -->
-<div style="background: #1db954; padding: 52px 24px; text-align: center; position: relative; overflow: hidden;">
-  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,0,0,.15) 0%, transparent 70%); pointer-events: none;"></div>
-  <div style="max-width: 1240px; margin: 0 auto; position: relative;">
-    <div style="font-size: clamp(4rem, 9vw, 7.5rem); font-weight: 900; color: #fff; letter-spacing: -.04em; line-height: .9; margin-bottom: 16px; text-shadow: 0 4px 24px rgba(0,0,0,.25);">FITPRO</div>
-    <p style="color: rgba(255,255,255,.85); font-size: clamp(1.1rem, 2vw, 1.6rem); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; max-width: 480px; margin: 0 auto; line-height: 1.55;">World Class Training, Nutrition &amp; Coaching to Help You Achieve Your Fitness Goals</p>
-  </div>
-</div>
+<!-- ==========================================================
+     FREE DOWNLOADS
+     ========================================================== -->
+<section id="resources" style="background: #0C151E; padding: 96px 24px; border-top: 1px solid rgba(45,64,85,.4);">
+  <div style="max-width: 1160px; margin: 0 auto;">
 
-<!-- =========================================================
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 52px;">
+      <p style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: #C4A030; margin-bottom: 14px;">Free Downloads</p>
+      <h2 style="font-family: 'Manrope', sans-serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 14px;">Start learning for free</h2>
+      <p style="font-size: 0.95rem; color: #5C7080; line-height: 1.7; max-width: 420px; margin: 0 auto;">
+        Download these guides and start seeing results before you ever spend a cent.
+      </p>
+    </div>
+
+    <!-- Guide cards -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+
+      <!-- Guide 1 -->
+      <div class="card-lift" style="background: #1E3147; border: 1px solid rgba(45,64,85,.6); border-radius: 12px; overflow: hidden; cursor: pointer;">
+        <div style="height: 160px; background: linear-gradient(135deg, #2D4055 0%, #1E3147 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(45,64,85,.5);">
+          <span style="font-size: 2.8rem;">📖</span>
+        </div>
+        <div style="padding: 24px;">
+          <p style="font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #C4A030; margin-bottom: 8px;">Beginner Guide</p>
+          <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3;">The Fat Loss Starter Kit</h3>
+          <p style="font-size: 0.83rem; color: #5C7080; line-height: 1.6; margin-bottom: 20px;">Everything you need to know to start losing fat this week — in plain English.</p>
+          <a href="#" class="btn-ghost" style="display: inline-block; color: #7BBFE8; padding: 9px 16px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(123,191,232,.2);">Download Free &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Guide 2 -->
+      <div class="card-lift" style="background: #1E3147; border: 1px solid rgba(45,64,85,.6); border-radius: 12px; overflow: hidden; cursor: pointer;">
+        <div style="height: 160px; background: linear-gradient(135deg, #2D4055 0%, #1E3147 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(45,64,85,.5);">
+          <span style="font-size: 2.8rem;">🥦</span>
+        </div>
+        <div style="padding: 24px;">
+          <p style="font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #C4A030; margin-bottom: 8px;">Nutrition</p>
+          <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3;">Eat More, Weigh Less</h3>
+          <p style="font-size: 0.83rem; color: #5C7080; line-height: 1.6; margin-bottom: 20px;">How to structure your meals so you're never hungry while still losing fat fast.</p>
+          <a href="#" class="btn-ghost" style="display: inline-block; color: #7BBFE8; padding: 9px 16px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(123,191,232,.2);">Download Free &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Guide 3 -->
+      <div class="card-lift" style="background: #1E3147; border: 1px solid rgba(45,64,85,.6); border-radius: 12px; overflow: hidden; cursor: pointer;">
+        <div style="height: 160px; background: linear-gradient(135deg, #2D4055 0%, #1E3147 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(45,64,85,.5);">
+          <span style="font-size: 2.8rem;">🏋️</span>
+        </div>
+        <div style="padding: 24px;">
+          <p style="font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #C4A030; margin-bottom: 8px;">Training</p>
+          <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3;">The 3-Day Fat Burn Plan</h3>
+          <p style="font-size: 0.83rem; color: #5C7080; line-height: 1.6; margin-bottom: 20px;">A simple, effective 3-day-per-week training plan that works whether you're at home or in the gym.</p>
+          <a href="#" class="btn-ghost" style="display: inline-block; color: #7BBFE8; padding: 9px 16px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(123,191,232,.2);">Download Free &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================
      FOOTER
-     ========================================================= -->
-<footer style="background: #080808; border-top: 1px solid #1c1c1c; padding: 52px 24px 28px;">
-  <div style="max-width: 1240px; margin: 0 auto;">
+     ========================================================== -->
+<footer style="background: #080F16; border-top: 1px solid rgba(45,64,85,.4); padding: 48px 24px 28px;">
+  <div style="max-width: 1160px; margin: 0 auto;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px;">
 
-    <!-- Top grid -->
-    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 44px;">
-
-      <!-- Brand col -->
+      <!-- Brand -->
       <div>
-        <div style="font-size: 2.2rem; font-weight: 900; color: #fff; letter-spacing: -.03em; margin-bottom: 14px; line-height: 1;">
-          FIT<span style="color:#ff5200;">PRO</span>
+        <p style="font-family: 'Manrope', sans-serif; font-size: 0.88rem; font-weight: 800; color: #fff; letter-spacing: -0.01em; margin-bottom: 10px;">
+          FAT LOSS. <span style="color: #C4A030;">ON EASY MODE.</span>
+        </p>
+        <p style="font-size: 0.82rem; color: #5C7080; line-height: 1.7; max-width: 260px;">Lose fat. Live life. Keep it simple.</p>
+      </div>
+
+      <!-- Links -->
+      <div style="display: flex; gap: 48px; flex-wrap: wrap;">
+        <div>
+          <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #2D4055; margin-bottom: 14px;">Coaching</p>
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <a href="#programs" class="nav-link" style="color: #5C7080; font-size: 0.84rem; text-decoration: none;">1-on-1 Programs</a>
+            <a href="#" class="nav-link" style="color: #5C7080; font-size: 0.84rem; text-decoration: none;">How It Works</a>
+            <a href="#" class="nav-link" style="color: #5C7080; font-size: 0.84rem; text-decoration: none;">Results</a>
+          </div>
         </div>
-        <p style="color: #555; font-size: 1.2rem; line-height: 1.75; max-width: 260px; text-transform: uppercase; font-weight: 700; letter-spacing: .04em;">World Class Training, Nutrition & Coaching to Help You Achieve Your Fitness Goals.</p>
-        <!-- Social icons placeholder -->
-        <div style="display: flex; gap: 12px; margin-top: 20px;">
-          <a href="#" style="width: 34px; height: 34px; background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 1.3rem; text-decoration: none; transition: background .2s ease;">f</a>
-          <a href="#" style="width: 34px; height: 34px; background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 1.3rem; text-decoration: none; transition: background .2s ease;">in</a>
-          <a href="#" style="width: 34px; height: 34px; background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 1.3rem; text-decoration: none; transition: background .2s ease;">yt</a>
+        <div>
+          <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #2D4055; margin-bottom: 14px;">Free Stuff</p>
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <a href="#resources" class="nav-link" style="color: #5C7080; font-size: 0.84rem; text-decoration: none;">Free Guides</a>
+            <a href="#community" class="nav-link" style="color: #5C7080; font-size: 0.84rem; text-decoration: none;">LeanMaxx University</a>
+            <a href="#" class="nav-link" style="color: #5C7080; font-size: 0.84rem; text-decoration: none;">Newsletter</a>
+          </div>
         </div>
-      </div>
-
-      <!-- Programs col -->
-      <div>
-        <h4 style="color: #fff; font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 18px;">Programs</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 11px;">
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Fat Burn Elite</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">8 Week Shred</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Muscle Builder Pro</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">All Programs</a></li>
-        </ul>
-      </div>
-
-      <!-- Resources col -->
-      <div>
-        <h4 style="color: #fff; font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 18px;">Resources</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 11px;">
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Free Guides</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Meal Plans</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Blog</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Community</a></li>
-        </ul>
-      </div>
-
-      <!-- Company col -->
-      <div>
-        <h4 style="color: #fff; font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 18px;">Company</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 11px;">
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">About Us</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Contact</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Privacy Policy</a></li>
-          <li><a href="#" style="color: #666; font-size: 1.2rem; transition: color .2s ease;">Terms of Service</a></li>
-        </ul>
       </div>
 
     </div>
 
-    <!-- Bottom bar -->
-    <div style="border-top: 1px solid #1a1a1a; padding-top: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-      <p style="color: #444; font-size: 1.1rem;">&copy; 2024 FitPro. All rights reserved.</p>
-      <p style="color: #444; font-size: 1.1rem;">*Results may vary. Individual results are not guaranteed.</p>
+    <div style="border-top: 1px solid rgba(45,64,85,.4); padding-top: 22px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+      <p style="font-size: 0.78rem; color: #2D4055;">&copy; 2024 LeanMaxx Coaching. All rights reserved.</p>
+      <p style="font-size: 0.78rem; color: #2D4055;">*Results may vary. Individual results are not guaranteed.</p>
     </div>
-
   </div>
 </footer>
 
