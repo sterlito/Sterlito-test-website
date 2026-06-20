@@ -28,8 +28,6 @@
       --gold-500: #C4A030;
       --gold-400: #D2B45A;
       --blue-300: #7BBFE8;
-      --slate-400: #5C7080;
-      --slate-500: #47566a;
       --text-primary: #ffffff;
       --text-secondary: #94a3b8;
       --text-tertiary: #5C7080;
@@ -60,16 +58,6 @@
     .card-lift:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 48px rgba(0,0,0,.5), 0 0 0 1px rgba(196,160,48,.08);
-    }
-
-    /* ── Typography Scale ─────────────────── */
-    .t-brand {
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold-500);
     }
 
     .t-hero {
@@ -114,14 +102,6 @@
       color: var(--text-primary);
     }
 
-    .t-section-sub {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--text-tertiary);
-      font-weight: 400;
-    }
-
     .t-pillar-title {
       font-family: 'Manrope', system-ui, sans-serif;
       font-size: 0.95rem;
@@ -138,13 +118,15 @@
       font-weight: 400;
     }
 
-    .t-overline {
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold-500);
+    .pillar-card {
+      text-align: center;
+      padding: 28px 16px;
+      background: rgba(12,21,30,0.6);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .dm-img {
@@ -154,14 +136,6 @@
       width: 100%;
       height: auto;
       display: block;
-    }
-
-    .divider {
-      width: 48px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold-500), transparent);
-      border: none;
-      margin: 0;
     }
 
     @media (max-width: 768px) {
@@ -182,10 +156,7 @@
 <section class="grain" style="position: relative; padding: 80px 24px 96px; overflow: hidden; background: radial-gradient(ellipse 80% 60% at 50% 25%, rgba(30,49,71,.55) 0%, transparent 65%), radial-gradient(ellipse 50% 80% at 85% 75%, rgba(196,160,48,.04) 0%, transparent 55%), var(--navy-950);">
   <div style="max-width: 780px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
 
-    <!-- Brand mark -->
-    <p class="t-brand" style="margin: 0 0 40px;">Sterlito</p>
-
-    <!-- Headline — split for visual weight -->
+    <!-- Headline -->
     <h1 class="t-hero" style="font-size: clamp(3rem, 8vw, 5.2rem); margin: 0 0 24px;">
       Fat Loss
       <span class="t-hero-accent" style="margin-top: 4px;">Coaching.</span>
@@ -197,7 +168,7 @@
     </p>
 
     <!-- Divider -->
-    <hr class="divider" style="margin: 0 auto 56px;">
+    <div style="width: 100%; max-width: 480px; height: 1px; background: var(--gold-500); margin: 0 auto 56px;"></div>
 
     <!-- STEP 1 -->
     <div style="margin-bottom: 40px;">
@@ -239,49 +210,47 @@
   <div style="max-width: 1000px; margin: 0 auto;">
 
     <div style="text-align: center; margin-bottom: 64px;">
-      <p class="t-overline" style="margin: 0 0 16px;">The Method</p>
-      <h2 class="t-section" style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0 0 16px; text-transform: uppercase;">
+      <h2 class="t-section" style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0; text-transform: uppercase;">
         Fat Loss Fundamentals
       </h2>
-      <p class="t-section-sub" style="max-width: 440px; margin: 0 auto;">The four pillars I use with every person I work with.</p>
     </div>
 
-    <div class="pillars-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;">
+    <div class="pillars-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
 
       <!-- Nutrition -->
-      <div style="text-align: center;">
-        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1px solid rgba(196,160,48,0.12);">
+      <div class="pillar-card">
+        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(196,160,48,0.12);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>
         <h3 class="t-pillar-title" style="margin: 0 0 10px;">Nutrition<br>Strategy</h3>
-        <p class="t-pillar-desc" style="margin: 0;">Simple eating systems that work with your life. No meal prep. No restriction.</p>
+        <p class="t-pillar-desc" style="margin: 0; flex-grow: 1;">Simple eating systems that work with your life. No meal prep required.</p>
       </div>
 
       <!-- Habits & Systems -->
-      <div style="text-align: center;">
-        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1px solid rgba(196,160,48,0.12);">
+      <div class="pillar-card">
+        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(196,160,48,0.12);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <h3 class="t-pillar-title" style="margin: 0 0 10px;">Habits &<br>Systems</h3>
-        <p class="t-pillar-desc" style="margin: 0;">Build routines that stick. Small changes that compound into real results.</p>
+        <p class="t-pillar-desc" style="margin: 0; flex-grow: 1;">Build routines that stick. Small changes that compound into results.</p>
       </div>
 
       <!-- Mindset -->
-      <div style="text-align: center;">
-        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1px solid rgba(196,160,48,0.12);">
+      <div class="pillar-card">
+        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(196,160,48,0.12);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
         <h3 class="t-pillar-title" style="margin: 0 0 10px;">Mindset<br>Coaching</h3>
-        <p class="t-pillar-desc" style="margin: 0;">Fix the thinking patterns that keep you stuck. Build real confidence.</p>
+        <p class="t-pillar-desc" style="margin: 0; flex-grow: 1;">Fix the thinking that keeps you stuck. Build real, lasting confidence.</p>
       </div>
 
       <!-- Accountability -->
-      <div style="text-align: center;">
-        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1px solid rgba(196,160,48,0.12);">
+      <div class="pillar-card">
+        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(196,160,48,0.12);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <h3 class="t-pillar-title" style="margin: 0 0 10px;">Accountability</h3>
-        <p class="t-pillar-desc" style="margin: 0;">Someone in your corner keeping you on track. No more doing this alone.</p>
+        <h3 class="t-pillar-title" style="margin: 0 0 10px;">Daily<br>Accountability</h3>
+        <p class="t-pillar-desc" style="margin: 0; flex-grow: 1;">Someone in your corner keeping you on track. No more going it alone.</p>
       </div>
 
     </div>
@@ -296,11 +265,9 @@
   <div style="max-width: 880px; margin: 0 auto; position: relative; z-index: 1;">
 
     <div style="text-align: center; margin-bottom: 64px;">
-      <p class="t-overline" style="margin: 0 0 16px;">Social Proof</p>
-      <h2 class="t-section" style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0 0 16px;">
+      <h2 class="t-section" style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0;">
         Real DMs from Instagram
       </h2>
-      <p class="t-section-sub" style="max-width: 400px; margin: 0 auto;">People reaching out after seeing my content.</p>
     </div>
 
     <div class="dm-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
