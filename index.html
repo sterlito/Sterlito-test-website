@@ -52,6 +52,13 @@
     .btn-bounce:active { animation: none; transform: translateY(0); }
     .btn-bounce:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
 
+    .btn-primary {
+      transition: transform 0.22s var(--ease-spring), opacity 0.18s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: .92; }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
+
     .card-lift {
       transition: transform 0.28s var(--ease-spring), box-shadow 0.28s ease;
     }
@@ -61,14 +68,15 @@
     }
 
     .pillar-card {
-      text-align: center;
-      padding: 36px 24px 40px;
+      padding: 32px 28px;
       background: var(--navy-800);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 16px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px;
+      text-align: left;
       transition: transform 0.28s var(--ease-spring), box-shadow 0.28s ease;
     }
     .pillar-card:hover {
@@ -85,6 +93,36 @@
       display: block;
     }
 
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+    .trust-badge svg { opacity: 0.7; }
+
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(8,15,22,0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+
     @media (max-width: 768px) {
       .pillars-grid { grid-template-columns: 1fr !important; }
       .dm-grid { grid-template-columns: 1fr !important; }
@@ -95,21 +133,58 @@
 
 
 <!-- ════════════════════════════════════════
-     HERO
+     STICKY BOTTOM BAR (appears on scroll)
      ════════════════════════════════════════ -->
-<section class="grain" style="position: relative; padding: 80px 24px 96px; overflow: hidden; background: radial-gradient(ellipse 80% 60% at 50% 25%, rgba(30,49,71,.55) 0%, transparent 65%), radial-gradient(ellipse 50% 80% at 85% 75%, rgba(196,160,48,.04) 0%, transparent 55%), var(--navy-950);">
+<div class="sticky-bar" id="stickyBar">
+  <p style="font-family: 'Inter', sans-serif; font-size: 0.82rem; color: var(--text-secondary); margin: 0; font-weight: 500;">Free 30-min strategy call. No pressure.</p>
+  <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-primary" style="background: var(--gold-500); color: var(--navy-950); padding: 10px 24px; border-radius: 6px; font-family: 'Manrope', sans-serif; font-size: 0.8rem; font-weight: 700; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;">
+    Book Now
+  </a>
+</div>
+<script>
+  (function(){
+    var bar = document.getElementById('stickyBar');
+    var shown = false;
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 600 && !shown){ bar.classList.add('visible'); shown = true; }
+      if(window.scrollY < 400 && shown){ bar.classList.remove('visible'); shown = false; }
+    });
+  })();
+</script>
+
+
+<!-- ════════════════════════════════════════
+     HERO — Lead with the pain, sell the outcome
+     ════════════════════════════════════════ -->
+<section class="grain" style="position: relative; padding: 72px 24px 88px; overflow: hidden; background: radial-gradient(ellipse 80% 60% at 50% 25%, rgba(30,49,71,.55) 0%, transparent 65%), radial-gradient(ellipse 50% 80% at 85% 75%, rgba(196,160,48,.04) 0%, transparent 55%), var(--navy-950);">
   <div style="max-width: 780px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
 
-    <!-- Headline -->
-    <h1 style="font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 0.95; color: var(--text-primary); font-size: clamp(3rem, 8vw, 5.2rem); margin: 0 0 24px;">
-      Fat Loss
-      <span style="color: var(--gold-500); display: block; margin-top: 4px;">Coaching.</span>
+    <!-- Headline — pain-focused, not label-focused -->
+    <h1 style="font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 1; color: var(--text-primary); font-size: clamp(2.6rem, 7vw, 4.4rem); margin: 0 0 24px;">
+      I Lost 20 lbs in 40 Days.
+      <span style="color: var(--gold-500); display: block; margin-top: 8px;">No Gym. No Meal Prep.</span>
     </h1>
 
-    <!-- Subline -->
-    <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; line-height: 1.75; color: var(--text-secondary); max-width: 480px; margin: 0 auto 56px; font-weight: 400;">
-      Lose fat without ruining your life. No running. No workouts. No strict diet required. Just a few systems that fit into a real, busy life.
+    <!-- Subline — speaks to THEM, not you -->
+    <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.75; color: var(--text-secondary); max-width: 500px; margin: 0 auto 40px; font-weight: 400;">
+      Now I help people do the same thing. If you're stuck, eating "healthy" but not losing weight — watch how I did it, then book a free call.
     </p>
+
+    <!-- Trust badges -->
+    <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 48px;">
+      <span class="trust-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        100% free call
+      </span>
+      <span class="trust-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        No pressure to buy
+      </span>
+      <span class="trust-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        30 minutes
+      </span>
+    </div>
 
     <!-- STEP 1 -->
     <div style="margin-bottom: 40px;">
@@ -138,6 +213,7 @@
       <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-bounce" style="display: inline-block; background: var(--gold-500); color: var(--navy-950); padding: 16px 44px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.88rem; font-weight: 700; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 24px rgba(196,160,48,.3);">
         BOOK A STRATEGY CALL
       </a>
+      <p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 14px 0 0; font-weight: 400;">Free. 30 minutes. Zero obligation.</p>
     </div>
 
   </div>
@@ -145,21 +221,22 @@
 
 
 <!-- ════════════════════════════════════════
-     FAT LOSS FUNDAMENTALS
+     WHAT HAPPENS WHEN WE WORK TOGETHER
      ════════════════════════════════════════ -->
 <section style="background: var(--navy-900); padding: 112px 24px; border-top: 1px solid var(--border);">
   <div style="max-width: 1060px; margin: 0 auto;">
 
     <div style="text-align: center; margin-bottom: 72px;">
-      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); margin: 0; text-transform: uppercase;">
-        Fat Loss Fundamentals
+      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); margin: 0 0 16px;">
+        What You Actually Get
       </h2>
+      <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-tertiary); line-height: 1.7; max-width: 460px; margin: 0 auto;">This isn't a cookie-cutter program. Everything is built around your life.</p>
     </div>
 
     <div class="pillars-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 900px; margin: 0 auto;">
 
       <!-- Nutrition -->
-      <div class="pillar-card" style="flex-direction: row; text-align: left; gap: 20px; padding: 32px 28px;">
+      <div class="pillar-card">
         <div style="width: 52px; height: 52px; min-width: 52px; background: rgba(196,160,48,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(196,160,48,0.12);">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>
@@ -170,7 +247,7 @@
       </div>
 
       <!-- Habits & Systems -->
-      <div class="pillar-card" style="flex-direction: row; text-align: left; gap: 20px; padding: 32px 28px;">
+      <div class="pillar-card">
         <div style="width: 52px; height: 52px; min-width: 52px; background: rgba(196,160,48,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(196,160,48,0.12);">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
@@ -181,7 +258,7 @@
       </div>
 
       <!-- Mindset -->
-      <div class="pillar-card" style="flex-direction: row; text-align: left; gap: 20px; padding: 32px 28px;">
+      <div class="pillar-card">
         <div style="width: 52px; height: 52px; min-width: 52px; background: rgba(196,160,48,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(196,160,48,0.12);">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
@@ -192,7 +269,7 @@
       </div>
 
       <!-- Accountability -->
-      <div class="pillar-card" style="flex-direction: row; text-align: left; gap: 20px; padding: 32px 28px;">
+      <div class="pillar-card">
         <div style="width: 52px; height: 52px; min-width: 52px; background: rgba(196,160,48,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(196,160,48,0.12);">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
@@ -208,48 +285,74 @@
 
 
 <!-- ════════════════════════════════════════
-     INSTAGRAM DM SCREENSHOTS
+     SOCIAL PROOF — DM SCREENSHOTS
      ════════════════════════════════════════ -->
 <section class="grain" style="position: relative; padding: 112px 24px; overflow: hidden; background: radial-gradient(ellipse 70% 50% at 70% 40%, rgba(30,49,71,.35) 0%, transparent 60%), var(--navy-950); border-top: 1px solid var(--border);">
   <div style="max-width: 880px; margin: 0 auto; position: relative; z-index: 1;">
 
     <div style="text-align: center; margin-bottom: 64px;">
-      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); margin: 0;">
-        Real DMs from Instagram
+      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); margin: 0 0 16px;">
+        People Already Trust My Advice
       </h2>
+      <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-tertiary); line-height: 1.7; max-width: 440px; margin: 0 auto;">These are real, unsolicited DMs from people who tried what I share on Instagram.</p>
     </div>
 
     <div class="dm-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 
-      <!-- Row 1 -->
-      <!-- DM 2 — Content compliment (top left) -->
       <div class="card-lift">
         <img src="dm-screenshots/dm2.png" alt="Instagram DM - content compliment" class="dm-img">
       </div>
 
-      <!-- DM 3 — Calorie conversation (top right) -->
       <div class="card-lift">
         <img src="dm-screenshots/dm3.png" alt="Instagram DM - calorie coaching conversation" class="dm-img">
       </div>
 
-      <!-- Row 2 -->
-      <!-- DM 4 — Inspire messages (below dm2) -->
       <div class="card-lift">
         <img src="dm-screenshots/dm4.png" alt="Instagram DM - inspiration messages" class="dm-img">
       </div>
 
-      <!-- DM 1 — London message (below dm3) -->
       <div class="card-lift">
         <img src="dm-screenshots/dm1.png" alt="Instagram DM - heartfelt message from London" class="dm-img">
       </div>
 
     </div>
 
-    <!-- CTA -->
-    <div style="text-align: center; margin-top: 72px;">
-      <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-bounce" style="display: inline-block; background: var(--gold-500); color: var(--navy-950); padding: 16px 44px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.88rem; font-weight: 700; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 24px rgba(196,160,48,.3);">
-        BOOK A STRATEGY CALL
-      </a>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     FINAL CTA — The close
+     ════════════════════════════════════════ -->
+<section style="padding: 104px 24px 120px; background: var(--navy-900); border-top: 1px solid var(--border);">
+  <div style="max-width: 640px; margin: 0 auto; text-align: center;">
+
+    <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); letter-spacing: -0.025em; line-height: 1.15; color: var(--text-primary); margin: 0 0 20px;">
+      Still reading?<br>
+      <span style="color: var(--gold-500);">That means you're serious.</span>
+    </h2>
+
+    <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; line-height: 1.75; color: var(--text-secondary); margin: 0 0 40px;">
+      Book the free call. We'll talk about where you're at, what's not working, and whether I can actually help. If I can't, I'll tell you. No pitch. No pressure.
+    </p>
+
+    <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-bounce" style="display: inline-block; background: var(--gold-500); color: var(--navy-950); padding: 18px 52px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 700; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 24px rgba(196,160,48,.3);">
+      BOOK YOUR FREE CALL
+    </a>
+
+    <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 20px;">
+      <span class="trust-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Free
+      </span>
+      <span class="trust-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        30 minutes
+      </span>
+      <span class="trust-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Zero obligation
+      </span>
     </div>
 
   </div>
