@@ -30,7 +30,7 @@
       --blue-300: #7BBFE8;
       --text-primary: #ffffff;
       --text-secondary: #94a3b8;
-      --text-tertiary: #5C7080;
+      --text-tertiary: #64748b;
       --border: rgba(45,64,85,.35);
     }
 
@@ -60,73 +60,20 @@
       box-shadow: 0 20px 48px rgba(0,0,0,.5), 0 0 0 1px rgba(196,160,48,.08);
     }
 
-    .t-hero {
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.035em;
-      line-height: 0.95;
-      color: var(--text-primary);
-    }
-
-    .t-hero-accent {
-      color: var(--gold-500);
-      display: block;
-    }
-
-    .t-body-lg {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--text-secondary);
-      font-weight: 400;
-    }
-
-    .t-step {
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-    }
-    .t-step strong {
-      color: var(--gold-500);
-      font-weight: 800;
-    }
-
-    .t-section {
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      color: var(--text-primary);
-    }
-
-    .t-pillar-title {
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.3;
-    }
-
-    .t-pillar-desc {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 0.84rem;
-      color: var(--text-tertiary);
-      line-height: 1.65;
-      font-weight: 400;
-    }
-
     .pillar-card {
       text-align: center;
-      padding: 28px 16px;
-      background: rgba(12,21,30,0.6);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      padding: 36px 24px 40px;
+      background: var(--navy-800);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      transition: transform 0.28s var(--ease-spring), box-shadow 0.28s ease;
+    }
+    .pillar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.4);
     }
 
     .dm-img {
@@ -157,22 +104,19 @@
   <div style="max-width: 780px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
 
     <!-- Headline -->
-    <h1 class="t-hero" style="font-size: clamp(3rem, 8vw, 5.2rem); margin: 0 0 24px;">
+    <h1 style="font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 0.95; color: var(--text-primary); font-size: clamp(3rem, 8vw, 5.2rem); margin: 0 0 24px;">
       Fat Loss
-      <span class="t-hero-accent" style="margin-top: 4px;">Coaching.</span>
+      <span style="color: var(--gold-500); display: block; margin-top: 4px;">Coaching.</span>
     </h1>
 
     <!-- Subline -->
-    <p class="t-body-lg" style="max-width: 480px; margin: 0 auto 56px;">
+    <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; line-height: 1.75; color: var(--text-secondary); max-width: 480px; margin: 0 auto 56px; font-weight: 400;">
       Lose fat without ruining your life. No running. No workouts. No strict diet required. Just a few systems that fit into a real, busy life.
     </p>
 
-    <!-- Divider -->
-    <div style="width: 100%; max-width: 480px; height: 1px; background: var(--gold-500); margin: 0 auto 56px;"></div>
-
     <!-- STEP 1 -->
     <div style="margin-bottom: 40px;">
-      <p class="t-step" style="margin: 0 0 24px;"><strong>STEP ONE</strong> &mdash; Must Watch Free Training</p>
+      <p style="font-family: 'Manrope', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 24px;"><strong style="color: var(--gold-500); font-weight: 800;">STEP ONE</strong> &mdash; Must Watch Free Training</p>
       <div id="yt-facade" onclick="
         var d=document.getElementById('yt-facade');
         d.innerHTML='<iframe src=\'https://www.youtube-nocookie.com/embed/DLVqUPZKZjc?autoplay=1&rel=0&modestbranding=1\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen style=\'position:absolute;inset:0;width:100%;height:100%;\'></iframe>';
@@ -193,7 +137,7 @@
 
     <!-- STEP 2 -->
     <div style="margin-top: 56px;">
-      <p class="t-step" style="margin: 0 0 24px;"><strong>STEP TWO</strong> &mdash; Book A 1:1 Session With Me</p>
+      <p style="font-family: 'Manrope', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 24px;"><strong style="color: var(--gold-500); font-weight: 800;">STEP TWO</strong> &mdash; Book A 1:1 Session With Me</p>
       <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-bounce" style="display: inline-block; background: var(--gold-500); color: var(--navy-950); padding: 16px 44px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.88rem; font-weight: 700; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 24px rgba(196,160,48,.3);">
         BOOK A STRATEGY CALL
       </a>
@@ -206,11 +150,11 @@
 <!-- ════════════════════════════════════════
      FAT LOSS FUNDAMENTALS
      ════════════════════════════════════════ -->
-<section style="background: var(--navy-900); padding: 104px 24px; border-top: 1px solid var(--border);">
-  <div style="max-width: 1000px; margin: 0 auto;">
+<section style="background: var(--navy-900); padding: 112px 24px; border-top: 1px solid var(--border);">
+  <div style="max-width: 1060px; margin: 0 auto;">
 
-    <div style="text-align: center; margin-bottom: 64px;">
-      <h2 class="t-section" style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0; text-transform: uppercase;">
+    <div style="text-align: center; margin-bottom: 72px;">
+      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); margin: 0; text-transform: uppercase;">
         Fat Loss Fundamentals
       </h2>
     </div>
@@ -219,38 +163,38 @@
 
       <!-- Nutrition -->
       <div class="pillar-card">
-        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(196,160,48,0.12);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <div style="width: 60px; height: 60px; background: rgba(196,160,48,0.08); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; border: 1px solid rgba(196,160,48,0.12);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>
-        <h3 class="t-pillar-title" style="margin: 0 0 10px;">Nutrition<br>Strategy</h3>
-        <p class="t-pillar-desc" style="margin: 0; flex-grow: 1;">Simple eating systems that work with your life. No meal prep required.</p>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text-primary); line-height: 1.3; margin: 0 0 14px;">Nutrition<br>Strategy</h3>
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--text-tertiary); line-height: 1.7; margin: 0; flex-grow: 1;">Simple eating systems that work with your life. No meal prep required.</p>
       </div>
 
       <!-- Habits & Systems -->
       <div class="pillar-card">
-        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(196,160,48,0.12);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <div style="width: 60px; height: 60px; background: rgba(196,160,48,0.08); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; border: 1px solid rgba(196,160,48,0.12);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
-        <h3 class="t-pillar-title" style="margin: 0 0 10px;">Habits &<br>Systems</h3>
-        <p class="t-pillar-desc" style="margin: 0; flex-grow: 1;">Build routines that stick. Small changes that compound into results.</p>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text-primary); line-height: 1.3; margin: 0 0 14px;">Habits &<br>Systems</h3>
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--text-tertiary); line-height: 1.7; margin: 0; flex-grow: 1;">Build routines that stick. Small changes that compound into real results.</p>
       </div>
 
       <!-- Mindset -->
       <div class="pillar-card">
-        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(196,160,48,0.12);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div style="width: 60px; height: 60px; background: rgba(196,160,48,0.08); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; border: 1px solid rgba(196,160,48,0.12);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
-        <h3 class="t-pillar-title" style="margin: 0 0 10px;">Mindset<br>Coaching</h3>
-        <p class="t-pillar-desc" style="margin: 0; flex-grow: 1;">Fix the thinking that keeps you stuck. Build real, lasting confidence.</p>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text-primary); line-height: 1.3; margin: 0 0 14px;">Mindset<br>Coaching</h3>
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--text-tertiary); line-height: 1.7; margin: 0; flex-grow: 1;">Fix the thinking that keeps you stuck. Build real, lasting confidence.</p>
       </div>
 
       <!-- Accountability -->
       <div class="pillar-card">
-        <div style="width: 52px; height: 52px; background: rgba(196,160,48,0.07); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(196,160,48,0.12);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div style="width: 60px; height: 60px; background: rgba(196,160,48,0.08); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; border: 1px solid rgba(196,160,48,0.12);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <h3 class="t-pillar-title" style="margin: 0 0 10px;">Daily<br>Accountability</h3>
-        <p class="t-pillar-desc" style="margin: 0; flex-grow: 1;">Someone in your corner keeping you on track. No more going it alone.</p>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text-primary); line-height: 1.3; margin: 0 0 14px;">Daily<br>Accountability</h3>
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--text-tertiary); line-height: 1.7; margin: 0; flex-grow: 1;">Someone in your corner keeping you on track. No more going it alone.</p>
       </div>
 
     </div>
@@ -261,21 +205,16 @@
 <!-- ════════════════════════════════════════
      INSTAGRAM DM SCREENSHOTS
      ════════════════════════════════════════ -->
-<section class="grain" style="position: relative; padding: 104px 24px; overflow: hidden; background: radial-gradient(ellipse 70% 50% at 70% 40%, rgba(30,49,71,.35) 0%, transparent 60%), var(--navy-950); border-top: 1px solid var(--border);">
+<section class="grain" style="position: relative; padding: 112px 24px; overflow: hidden; background: radial-gradient(ellipse 70% 50% at 70% 40%, rgba(30,49,71,.35) 0%, transparent 60%), var(--navy-950); border-top: 1px solid var(--border);">
   <div style="max-width: 880px; margin: 0 auto; position: relative; z-index: 1;">
 
     <div style="text-align: center; margin-bottom: 64px;">
-      <h2 class="t-section" style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0;">
+      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); margin: 0;">
         Real DMs from Instagram
       </h2>
     </div>
 
     <div class="dm-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-
-      <!-- DM 1 — London message -->
-      <div class="card-lift" style="grid-column: 1 / -1; max-width: 480px; margin: 0 auto;">
-        <img src="dm-screenshots/dm1.png" alt="Instagram DM - heartfelt message from London" class="dm-img">
-      </div>
 
       <!-- DM 2 — Content compliment -->
       <div class="card-lift">
@@ -290,6 +229,11 @@
       <!-- DM 4 — Inspire messages -->
       <div class="card-lift" style="grid-column: 1 / -1; max-width: 480px; margin: 0 auto;">
         <img src="dm-screenshots/dm4.png" alt="Instagram DM - inspiration messages" class="dm-img">
+      </div>
+
+      <!-- DM 1 — London message (now at bottom) -->
+      <div class="card-lift" style="grid-column: 1 / -1; max-width: 480px; margin: 0 auto;">
+        <img src="dm-screenshots/dm1.png" alt="Instagram DM - heartfelt message from London" class="dm-img">
       </div>
 
     </div>
