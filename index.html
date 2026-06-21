@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sterlito — Fat Loss Coaching | Lost 20 lbs in 40 Days</title>
-  <meta name="description" content="I lost 20 lbs in 40 days with no gym and no meal prep. Now I help others do the same. Book a free 30-minute strategy call.">
-  <meta property="og:title" content="Sterlito — Fat Loss Coaching">
-  <meta property="og:description" content="I lost 20 lbs in 40 days. No gym. No meal prep. Book a free strategy call.">
+  <title>Sterlito — 1:1 Fat Loss Coaching</title>
+  <meta name="description" content="1:1 fat loss coaching. Lose multiple pounds per week without running, working out, or following a strict diet. Book a free fat loss assessment.">
+  <meta property="og:title" content="Sterlito — 1:1 Fat Loss Coaching">
+  <meta property="og:description" content="Helping people lose multiple pounds per week without running, working out, or strict diets.">
   <meta property="og:type" content="website">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
       --navy-800: #142233;
       --navy-700: #1E3147;
       --gold-500: #C4A030;
-      --gold-400: #D2B45A;
+      --gold-bright: #E8C840;
       --blue-300: #7BBFE8;
       --text-primary: #ffffff;
       --text-secondary: #94a3b8;
@@ -65,14 +65,6 @@
     .btn-primary:active { transform: translateY(0); }
     .btn-primary:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
 
-    .card-lift {
-      transition: transform 0.28s var(--ease-spring), box-shadow 0.28s ease;
-    }
-    .card-lift:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 48px rgba(0,0,0,.5), 0 0 0 1px rgba(196,160,48,.08);
-    }
-
     .pillar-card {
       padding: 32px 28px;
       background: var(--navy-800);
@@ -98,17 +90,6 @@
       height: auto;
       display: block;
     }
-
-    .trust-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      color: var(--text-tertiary);
-      font-weight: 500;
-    }
-    .trust-badge svg { opacity: 0.7; }
 
     .sticky-bar {
       position: fixed;
@@ -136,9 +117,9 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(196,160,48,0.12);
-      border: 1px solid rgba(196,160,48,0.25);
-      color: var(--gold-500);
+      background: rgba(232,200,64,0.12);
+      border: 1px solid rgba(232,200,64,0.25);
+      color: var(--gold-bright);
       font-family: 'Manrope', sans-serif;
       font-size: 0.82rem;
       font-weight: 800;
@@ -167,7 +148,7 @@
       padding: 0;
       line-height: 1.4;
     }
-    .faq-q:hover { color: var(--gold-500); }
+    .faq-q:hover { color: var(--gold-bright); }
     .faq-q:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 4px; border-radius: 4px; }
     .faq-q svg {
       flex-shrink: 0;
@@ -195,7 +176,7 @@
 
     @media (max-width: 768px) {
       .pillars-grid { grid-template-columns: 1fr !important; }
-      .dm-grid { grid-template-columns: 1fr !important; }
+      .dm-grid { flex-direction: column !important; }
       .call-steps { grid-template-columns: 1fr !important; }
       .sticky-bar { flex-direction: row; gap: 12px; padding: 10px 16px; }
       .sticky-bar p { font-size: 0.75rem; }
@@ -209,11 +190,9 @@
 <body>
 
 
-<!-- ════════════════════════════════════════
-     STICKY BOTTOM BAR
-     ════════════════════════════════════════ -->
+<!-- STICKY BOTTOM BAR -->
 <div class="sticky-bar" id="stickyBar">
-  <p style="font-family: 'Inter', sans-serif; font-size: 0.82rem; color: var(--text-secondary); margin: 0; font-weight: 500;">Free 30-min strategy call. No pressure.</p>
+  <p style="font-family: 'Inter', sans-serif; font-size: 0.82rem; color: var(--text-secondary); margin: 0; font-weight: 500;">Free fat loss assessment</p>
   <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-primary" style="background: var(--gold-500); color: var(--navy-950); padding: 10px 24px; border-radius: 6px; font-family: 'Manrope', sans-serif; font-size: 0.8rem; font-weight: 700; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;">
     Book Now
   </a>
@@ -249,7 +228,7 @@
 
     <!-- STEP 1 -->
     <div style="margin-bottom: 40px;">
-      <p style="font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: 0.06em; color: var(--text-secondary); margin: 0 0 28px;"><strong style="color: var(--gold-500); font-weight: 800; text-transform: uppercase;">STEP 1</strong> - Must Watch Free Training</p>
+      <p style="font-family: 'Manrope', sans-serif; font-size: 2rem; letter-spacing: 0.04em; margin: 0 0 28px;"><strong style="color: var(--gold-bright); font-weight: 800; text-transform: uppercase;">STEP 1</strong> <span style="color: var(--text-tertiary); font-weight: 500;">- Must Watch Free Training</span></p>
       <div id="yt-facade" onclick="
         var d=document.getElementById('yt-facade');
         d.innerHTML='<iframe src=\'https://www.youtube-nocookie.com/embed/DLVqUPZKZjc?autoplay=1&rel=0&modestbranding=1\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen style=\'position:absolute;inset:0;width:100%;height:100%;\'></iframe>';
@@ -270,11 +249,10 @@
 
     <!-- STEP 2 -->
     <div style="margin-top: 56px;">
-      <p style="font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: 0.06em; color: var(--text-secondary); margin: 0 0 28px;"><strong style="color: var(--gold-500); font-weight: 800; text-transform: uppercase;">STEP 2</strong> - Book A 1:1 Session With Me</p>
+      <p style="font-family: 'Manrope', sans-serif; font-size: 2rem; letter-spacing: 0.04em; margin: 0 0 28px;"><strong style="color: var(--gold-bright); font-weight: 800; text-transform: uppercase;">STEP 2</strong> <span style="color: var(--text-tertiary); font-weight: 500;">- Book A 1:1 Session With Me</span></p>
       <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-bounce" style="display: inline-block; background: var(--gold-500); color: var(--navy-950); padding: 16px 44px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.88rem; font-weight: 700; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 24px rgba(196,160,48,.3);">
         BOOK A STRATEGY CALL
       </a>
-      <p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 14px 0 0; font-weight: 400;">Free. 30 minutes. Zero obligation.</p>
     </div>
 
   </div>
@@ -282,7 +260,7 @@
 
 
 <!-- ════════════════════════════════════════
-     WHAT YOU ACTUALLY GET
+     FAT LOSS FUNDAMENTALS
      ════════════════════════════════════════ -->
 <section style="background: var(--navy-900); padding: 112px 24px; border-top: 1px solid var(--border);">
   <div style="max-width: 1060px; margin: 0 auto;">
@@ -341,43 +319,42 @@
 
 
 <!-- ════════════════════════════════════════
-     WHAT HAPPENS ON THE CALL — Friction killer
+     WHAT HAPPENS ON THE CALL
      ════════════════════════════════════════ -->
 <section class="grain" style="position: relative; padding: 104px 24px; overflow: hidden; background: var(--navy-950); border-top: 1px solid var(--border);">
   <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 1;">
 
     <div style="text-align: center; margin-bottom: 64px;">
-      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); margin: 0 0 16px;">
+      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); margin: 0;">
         What Happens on the Call
       </h2>
-      <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-tertiary); line-height: 1.7; max-width: 440px; margin: 0 auto;">No surprises. Here's exactly what to expect.</p>
     </div>
 
     <div class="call-steps" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
 
       <div style="text-align: center; padding: 32px 20px; background: var(--navy-800); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;">
         <div class="step-number" style="margin: 0 auto 16px;">1</div>
-        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text-primary); margin: 0 0 10px;">We Talk</h3>
-        <p style="font-family: 'Inter', sans-serif; font-size: 0.84rem; color: var(--text-tertiary); line-height: 1.6; margin: 0;">You tell me where you're at and what you've already tried. I listen.</p>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text-primary); margin: 0 0 10px;">I Find Your Roadblock</h3>
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.84rem; color: var(--text-tertiary); line-height: 1.6; margin: 0;">We figure out the one thing that's actually stopping you from losing fat right now.</p>
       </div>
 
       <div style="text-align: center; padding: 32px 20px; background: var(--navy-800); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;">
         <div class="step-number" style="margin: 0 auto 16px;">2</div>
-        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text-primary); margin: 0 0 10px;">I Give You a Plan</h3>
-        <p style="font-family: 'Inter', sans-serif; font-size: 0.84rem; color: var(--text-tertiary); line-height: 1.6; margin: 0;">Even if we don't work together, you'll leave with something actionable.</p>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text-primary); margin: 0 0 10px;">I Give You a Plan to Fix It</h3>
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.84rem; color: var(--text-tertiary); line-height: 1.6; margin: 0;">You walk away with something you can actually use, whether we work together or not.</p>
       </div>
 
       <div style="text-align: center; padding: 32px 20px; background: var(--navy-800); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;">
         <div class="step-number" style="margin: 0 auto 16px;">3</div>
-        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text-primary); margin: 0 0 10px;">You Decide</h3>
-        <p style="font-family: 'Inter', sans-serif; font-size: 0.84rem; color: var(--text-tertiary); line-height: 1.6; margin: 0;">If it's a good fit, great. If not, no hard feelings. Genuinely.</p>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text-primary); margin: 0 0 10px;">I Show You My Program</h3>
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.84rem; color: var(--text-tertiary); line-height: 1.6; margin: 0;">If it makes sense for you, I'll walk you through how we'd work together. If not, no worries.</p>
       </div>
 
     </div>
 
     <div style="text-align: center; margin-top: 48px;">
       <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-bounce" style="display: inline-block; background: var(--gold-500); color: var(--navy-950); padding: 16px 44px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.88rem; font-weight: 700; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 24px rgba(196,160,48,.3);">
-        BOOK A STRATEGY CALL
+        FREE FAT LOSS ASSESSMENT
       </a>
     </div>
 
@@ -399,7 +376,6 @@
     </div>
 
     <div class="dm-grid" style="display: flex; gap: 20px;">
-      <!-- Left column -->
       <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
         <div>
           <img src="dm-screenshots/dm2.png" alt="Instagram DM - content compliment" class="dm-img">
@@ -408,7 +384,6 @@
           <img src="dm-screenshots/dm4.png" alt="Instagram DM - inspiration messages" class="dm-img">
         </div>
       </div>
-      <!-- Right column -->
       <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
         <div>
           <img src="dm-screenshots/dm3.png" alt="Instagram DM - calorie coaching conversation" class="dm-img">
@@ -424,7 +399,7 @@
 
 
 <!-- ════════════════════════════════════════
-     FAQ — Objection handling
+     FAQ
      ════════════════════════════════════════ -->
 <section class="grain" style="position: relative; padding: 104px 24px; overflow: hidden; background: var(--navy-950); border-top: 1px solid var(--border);">
   <div style="max-width: 680px; margin: 0 auto; position: relative; z-index: 1;">
@@ -443,7 +418,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-a">
-          <p>Yes. 100%. It's a real conversation — not a sales pitch disguised as a free call. If I can help, I'll tell you how. If I can't, I'll tell you that too.</p>
+          <p>Yeah, completely free. I'll find your biggest roadblock, give you a real plan to fix it, and then tell you about my program. If it's not for you, that's totally fine. You still walk away with something useful.</p>
         </div>
       </div>
 
@@ -453,27 +428,27 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-a">
-          <p>No. I lost 20 lbs without stepping into a gym. This is about nutrition, habits, and systems — not grinding in the gym every day.</p>
+          <p>Nope. I lost 20 lbs without touching a gym. This whole thing is built around nutrition, habits, and simple systems you can do from home. If you want to work out, cool, but it's not required at all.</p>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          What if I've tried everything and nothing works?
+          I've tried a bunch of stuff and nothing sticks
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-a">
-          <p>That's exactly who I help. Most people haven't failed — they've been following the wrong systems. On the call, we'll figure out what's actually going on.</p>
+          <p>That's literally most of the people I talk to. It's usually not a "you" problem. It's that you've been following advice that doesn't fit your actual life. On the call we'll figure out what's going on and what to do about it.</p>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          I'm busy — will this take over my life?
+          I don't have a lot of free time
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-a">
-          <p>The whole point is that it fits into your life. No 2-hour gym sessions. No meal prep Sundays. Just a few simple systems that take minutes, not hours.</p>
+          <p>That's kind of the whole point. There's no meal prepping for hours, no long gym sessions, none of that. The systems I teach take a few minutes a day. If you can scroll Instagram, you have the time.</p>
         </div>
       </div>
 
@@ -483,7 +458,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-a">
-          <p>No. I still eat the foods I enjoy. This isn't about restriction — it's about strategy. You'd be surprised how much you can eat and still lose fat.</p>
+          <p>No way. I still eat the stuff I like. This isn't about chicken and broccoli every day. It's about being smart with what you're already eating. Most people are surprised by how much they can eat and still drop weight.</p>
         </div>
       </div>
 
@@ -494,42 +469,26 @@
 
 
 <!-- ════════════════════════════════════════
-     FINAL CTA — The close
+     FINAL CTA
      ════════════════════════════════════════ -->
 <section style="padding: 104px 24px 140px; background: var(--navy-900); border-top: 1px solid var(--border);">
   <div style="max-width: 640px; margin: 0 auto; text-align: center;">
 
     <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); letter-spacing: -0.025em; line-height: 1.15; color: var(--text-primary); margin: 0 0 20px;">
       Still reading?<br>
-      <span style="color: var(--gold-500);">That means you're serious.</span>
+      <span style="color: var(--gold-bright);">That means you're serious.</span>
     </h2>
 
     <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; line-height: 1.75; color: var(--text-secondary); margin: 0 0 40px;">
-      Book the free call. We'll talk about where you're at, what's not working, and whether I can actually help. If I can't, I'll tell you. No pitch. No pressure.
+      Book the free call. I'll find the thing that's actually holding you back, give you a plan to fix it, and show you how we can work together. Takes 30 minutes.
     </p>
 
     <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="btn-bounce" style="display: inline-block; background: var(--gold-500); color: var(--navy-950); padding: 18px 52px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 700; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 24px rgba(196,160,48,.3);">
-      BOOK YOUR FREE CALL
+      FREE FAT LOSS ASSESSMENT
     </a>
 
-    <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 20px;">
-      <span class="trust-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        Free
-      </span>
-      <span class="trust-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        30 minutes
-      </span>
-      <span class="trust-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold-500)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        Zero obligation
-      </span>
-    </div>
-
     <!-- Social link -->
-    <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border);">
-      <p style="font-size: 0.82rem; color: var(--text-tertiary); margin: 0 0 8px;">Want to check me out first?</p>
+    <div style="margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border);">
       <a href="https://www.instagram.com/sterlitooo/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 0.88rem; text-decoration: none; font-weight: 500; transition: color 0.18s ease;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='var(--text-secondary)'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         @sterlitooo
