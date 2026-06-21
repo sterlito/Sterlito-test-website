@@ -40,15 +40,8 @@
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    /* ── Shared card style ──────────────── */
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 32px 28px;
-    }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; }
 
-    /* ── Buttons ─────────────────────────── */
     @keyframes shake-burst {
       0%, 45%, 100% { transform: translateY(0); }
       4% { transform: translateY(-8px); }
@@ -63,45 +56,24 @@
       40% { transform: translateY(0); }
     }
     .cta {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--bg-1);
-      padding: 18px 52px;
-      border-radius: 8px;
-      border: 2px solid var(--gold-dark);
-      font-family: 'Manrope', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 800;
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      display: inline-block; background: var(--gold); color: var(--bg-1);
+      padding: 18px 52px; border-radius: 8px; border: 2px solid var(--gold-dark);
+      font-family: 'Manrope', sans-serif; font-size: 1.05rem; font-weight: 800;
+      text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;
       box-shadow: 0 4px 24px rgba(196,160,48,.25);
-      animation: shake-burst 2.5s ease-in-out infinite;
-      transition: opacity 0.18s ease;
+      animation: shake-burst 2.5s ease-in-out infinite; transition: opacity 0.18s ease;
     }
     .cta:hover { animation: none; transform: translateY(-2px); opacity: .92; }
     .cta:active { animation: none; transform: translateY(0); }
     .cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .cta-sub { font-size: 0.78rem; color: var(--dim); margin: 14px 0 0; font-weight: 400; }
 
-    /* ── Section heading ─────────────────── */
     .section-heading {
-      font-family: 'Manrope', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      color: var(--white);
-      margin: 0 0 16px;
-    }
-    .section-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      color: var(--dim);
-      line-height: 1.7;
-      margin: 0;
+      font-family: 'Manrope', sans-serif; font-weight: 800;
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.02em;
+      line-height: 1.1; color: var(--white); margin: 0 0 16px;
     }
 
-    /* ── FAQ ──────────────────────────────── */
     .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
     .faq-item:last-child { border-bottom: none; }
     .faq-q {
@@ -118,14 +90,8 @@
     .faq-item.open .faq-a { max-height: 200px; padding-top: 16px; }
     .faq-a p { font-family: 'Inter', sans-serif; font-size: 0.92rem; color: var(--body); line-height: 1.7; margin: 0; }
 
-    /* ── DM images ────────────────────────── */
-    .dm-img {
-      border-radius: 14px; border: 1px solid var(--border);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      width: 100%; height: auto; display: block;
-    }
+    .dm-img { border-radius: 14px; border: 1px solid var(--border); box-shadow: 0 8px 32px rgba(0,0,0,0.4); width: 100%; height: auto; display: block; }
 
-    /* ── Sticky bar ───────────────────────── */
     .sticky-bar {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
       background: rgba(8,15,22,0.95); backdrop-filter: blur(12px);
@@ -137,32 +103,25 @@
     .sticky-bar .cta { padding: 10px 24px; font-size: 0.82rem; animation: none; }
     .sticky-bar .cta:hover { transform: translateY(-2px); opacity: .92; }
 
-    /* ── Responsive ───────────────────────── */
     @media (max-width: 768px) {
       :root { --section-pad: 64px; }
       .grid-2 { grid-template-columns: 1fr !important; }
       .grid-3 { grid-template-columns: 1fr !important; }
       .dm-cols { flex-direction: column !important; }
       .sticky-bar span { display: none; }
-
       .hero-h1 { font-size: 2.4rem !important; }
       .section-heading { font-size: 1.6rem !important; }
-      .discover-heading { font-size: 1.8rem !important; }
       .step-line { font-size: 0.95rem !important; }
       .step-line strong { font-size: 1.05rem !important; }
       .cta { padding: 16px 36px !important; font-size: 0.92rem !important; }
       .card { padding: 24px 20px !important; }
       .faq-q { font-size: 0.95rem !important; }
-      .call-card h3 { font-size: 1rem !important; }
     }
-
     @media (max-width: 480px) {
       :root { --section-pad: 52px; }
       body { padding-bottom: 52px; }
-
       .hero-h1 { font-size: 2rem !important; line-height: 1.1 !important; }
       .section-heading { font-size: 1.4rem !important; }
-      .discover-heading { font-size: 1.5rem !important; }
       .hero-sub { font-size: 0.92rem !important; }
       .step-line { font-size: 0.85rem !important; }
       .step-line strong { font-size: 0.95rem !important; }
@@ -172,10 +131,8 @@
       .card p { font-size: 0.82rem !important; }
       .faq-q { font-size: 0.88rem !important; }
       .faq-a p { font-size: 0.85rem !important; }
-      .section-sub { font-size: 0.88rem !important; }
       .closing-heading { font-size: 1.4rem !important; }
       .closing-body { font-size: 0.92rem !important; }
-      .discover-sub { font-size: 0.92rem !important; }
       .sticky-bar .cta { padding: 10px 20px !important; font-size: 0.78rem !important; }
       .video-wrap { max-width: 100% !important; padding-bottom: 56.25% !important; }
     }
@@ -185,7 +142,7 @@
 
 <!-- Sticky bar -->
 <div class="sticky-bar" id="stickyBar">
-  <span style="font-size: 0.82rem; color: var(--body); font-weight: 500;">Free strategy call</span>
+  <span style="font-size: 0.82rem; color: var(--body); font-weight: 500;">Limited spots each month</span>
   <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="cta">Book Now</a>
 </div>
 <script>
@@ -207,8 +164,12 @@
     <h1 class="hero-h1" style="font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--white); font-size: clamp(2.6rem, 7vw, 4.2rem); margin: 0 0 20px;">
       1:1 Fat Loss Coaching
     </h1>
-    <p class="hero-sub" style="font-size: 1.05rem; line-height: 1.75; color: var(--body); max-width: 520px; margin: 0 auto 56px;">
-      Helping people lose multiple pounds per week without running, working out, or following a strict diet.
+    <p class="hero-sub" style="font-size: 1.05rem; line-height: 1.75; color: var(--body); max-width: 520px; margin: 0 auto 20px;">
+      You've tried the diets. You've tried "eating healthy." Nothing stuck. I'll show you the exact systems I used to lose 20 lbs in 40 days with no gym and no meal prep.
+    </p>
+    <!-- Who this is for -->
+    <p style="font-size: 0.82rem; color: var(--dim); margin: 0 auto 52px; max-width: 400px;">
+      For people who are done guessing and want someone to tell them exactly what to do.
     </p>
 
     <!-- Step 1 -->
@@ -232,22 +193,13 @@
     </div>
 
     <!-- Step 2 -->
-    <p style="font-family: 'Manrope', sans-serif; font-size: 1.15rem; letter-spacing: 0.06em; color: var(--white); margin: 56px 0 24px;">
+    <p class="step-line" style="font-family: 'Manrope', sans-serif; font-size: 1.15rem; letter-spacing: 0.06em; color: var(--white); margin: 56px 0 24px;">
       <strong style="font-weight: 900; font-size: 1.3rem;">STEP 2</strong>
       <span style="color: var(--dim); font-weight: 400;"> — Book A 1:1 Session With Me</span>
     </p>
 
     <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="cta">BOOK A STRATEGY CALL</a>
-
-    <!-- Discover -->
-    <div style="margin-top: 72px;">
-      <h2 class="discover-heading" style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.15; color: var(--white); margin: 0 0 16px; text-transform: uppercase;">
-        Discover The<br>Proven Systems
-      </h2>
-      <p class="discover-sub" style="font-size: 1.05rem; line-height: 1.7; margin: 0;">
-        <span style="color: var(--dim);">That made my</span> <strong style="color: var(--white);">abs pop out</strong> <span style="color: var(--dim);">in under 60 days</span>
-      </p>
-    </div>
+    <p class="cta-sub">I only take on a handful of people each month.</p>
 
   </div>
 </section>
@@ -259,6 +211,7 @@
 
     <div style="text-align: center; margin-bottom: 56px;">
       <h2 class="section-heading" style="text-transform: uppercase;">Fat Loss Fundamentals</h2>
+      <p style="font-size: 0.95rem; color: var(--dim); line-height: 1.7; max-width: 440px; margin: 16px auto 0;">The four things I focus on with every person I work with.</p>
     </div>
 
     <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
@@ -302,6 +255,11 @@
         </div>
       </div>
     </div>
+
+    <!-- CTA after fundamentals -->
+    <div style="text-align: center; margin-top: 48px;">
+      <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="cta">BOOK A STRATEGY CALL</a>
+    </div>
   </div>
 </section>
 
@@ -334,10 +292,6 @@
       </div>
     </div>
 
-    <div style="text-align: center; margin-top: 48px;">
-      <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="cta">BOOK A STRATEGY CALL</a>
-    </div>
-
   </div>
 </section>
 
@@ -348,7 +302,7 @@
 
     <div style="text-align: center; margin-bottom: 56px;">
       <h2 class="section-heading">People Already Trust My Advice</h2>
-      <p class="section-sub" style="max-width: 440px; margin: 16px auto 0;">Real, unsolicited DMs from people who tried what I share on Instagram.</p>
+      <p style="font-size: 0.95rem; color: var(--dim); line-height: 1.7; max-width: 440px; margin: 16px auto 0;">Real, unsolicited DMs from people who tried what I share on Instagram.</p>
     </div>
 
     <div class="dm-cols" style="display: flex; gap: 16px;">
@@ -360,6 +314,12 @@
         <img src="dm-screenshots/dm3.png" alt="Instagram DM" class="dm-img">
         <img src="dm-screenshots/dm1.png" alt="Instagram DM" class="dm-img">
       </div>
+    </div>
+
+    <!-- CTA right after social proof — highest conversion point -->
+    <div style="text-align: center; margin-top: 56px;">
+      <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="cta">BOOK A STRATEGY CALL</a>
+      <p class="cta-sub">Takes 2 minutes to book. The call is free.</p>
     </div>
 
   </div>
@@ -400,6 +360,12 @@
         <div class="faq-a"><p>That's kind of the whole point. There's no meal prepping for hours, no long gym sessions, none of that. The systems I teach take a few minutes a day. If you can scroll Instagram, you have the time.</p></div>
       </div>
       <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How fast will I see results?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Most people notice changes in the first week or two. I lost 20 lbs in 40 days. Everyone's different, but the systems work fast because they're designed to fit into your life, not fight against it.</p></div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Do I have to eat boring food?
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -416,14 +382,15 @@
   <div style="max-width: 600px; margin: 0 auto; text-align: center;">
 
     <h2 class="closing-heading" style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.025em; line-height: 1.15; color: var(--white); margin: 0 0 20px;">
-      Still reading?<br>
-      <span style="color: var(--gold);">That means you're serious.</span>
+      You're either going to figure this out<br>
+      <span style="color: var(--gold);">or keep starting over every Monday.</span>
     </h2>
     <p class="closing-body" style="font-size: 1.05rem; line-height: 1.75; color: var(--body); margin: 0 0 40px;">
-      Book the free call. I'll find the thing that's actually holding you back, give you a plan to fix it, and show you how we can work together. Takes 30 minutes.
+      30 minutes. I'll tell you exactly what's holding you back, give you a plan, and show you how we can work together. If it's not a fit, no hard feelings.
     </p>
 
     <a href="https://calendly.com/sterlitooo/30min" target="_blank" rel="noopener" class="cta">BOOK A STRATEGY CALL</a>
+    <p class="cta-sub">Limited spots. The call is free.</p>
 
     <div style="margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);">
       <a href="https://www.instagram.com/sterlitooo/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; color: var(--dim); font-size: 0.88rem; text-decoration: none; font-weight: 500; transition: color 0.18s ease;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='var(--dim)'">
