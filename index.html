@@ -139,10 +139,45 @@
 
     /* ── Responsive ───────────────────────── */
     @media (max-width: 768px) {
+      :root { --section-pad: 64px; }
       .grid-2 { grid-template-columns: 1fr !important; }
       .grid-3 { grid-template-columns: 1fr !important; }
       .dm-cols { flex-direction: column !important; }
       .sticky-bar span { display: none; }
+
+      .hero-h1 { font-size: 2.4rem !important; }
+      .section-heading { font-size: 1.6rem !important; }
+      .discover-heading { font-size: 1.8rem !important; }
+      .step-line { font-size: 0.95rem !important; }
+      .step-line strong { font-size: 1.05rem !important; }
+      .cta { padding: 16px 36px !important; font-size: 0.92rem !important; }
+      .card { padding: 24px 20px !important; }
+      .faq-q { font-size: 0.95rem !important; }
+      .call-card h3 { font-size: 1rem !important; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --section-pad: 52px; }
+      body { padding-bottom: 52px; }
+
+      .hero-h1 { font-size: 2rem !important; line-height: 1.1 !important; }
+      .section-heading { font-size: 1.4rem !important; }
+      .discover-heading { font-size: 1.5rem !important; }
+      .hero-sub { font-size: 0.92rem !important; }
+      .step-line { font-size: 0.85rem !important; }
+      .step-line strong { font-size: 0.95rem !important; }
+      .cta { padding: 14px 28px !important; font-size: 0.85rem !important; letter-spacing: 0.05em !important; }
+      .card { padding: 20px 16px !important; }
+      .card h3 { font-size: 0.92rem !important; }
+      .card p { font-size: 0.82rem !important; }
+      .faq-q { font-size: 0.88rem !important; }
+      .faq-a p { font-size: 0.85rem !important; }
+      .section-sub { font-size: 0.88rem !important; }
+      .closing-heading { font-size: 1.4rem !important; }
+      .closing-body { font-size: 0.92rem !important; }
+      .discover-sub { font-size: 0.92rem !important; }
+      .sticky-bar .cta { padding: 10px 20px !important; font-size: 0.78rem !important; }
+      .video-wrap { max-width: 100% !important; padding-bottom: 56.25% !important; }
     }
   </style>
 </head>
@@ -169,15 +204,15 @@
 <section style="padding: var(--section-pad) 24px; background: var(--bg-1);">
   <div style="max-width: var(--max-w); margin: 0 auto; text-align: center;">
 
-    <h1 style="font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--white); font-size: clamp(2.6rem, 7vw, 4.2rem); margin: 0 0 20px;">
+    <h1 class="hero-h1" style="font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--white); font-size: clamp(2.6rem, 7vw, 4.2rem); margin: 0 0 20px;">
       1:1 Fat Loss Coaching
     </h1>
-    <p style="font-size: 1.05rem; line-height: 1.75; color: var(--body); max-width: 520px; margin: 0 auto 56px;">
+    <p class="hero-sub" style="font-size: 1.05rem; line-height: 1.75; color: var(--body); max-width: 520px; margin: 0 auto 56px;">
       Helping people lose multiple pounds per week without running, working out, or following a strict diet.
     </p>
 
     <!-- Step 1 -->
-    <p style="font-family: 'Manrope', sans-serif; font-size: 1.15rem; letter-spacing: 0.06em; color: var(--white); margin: 0 0 24px;">
+    <p class="step-line" style="font-family: 'Manrope', sans-serif; font-size: 1.15rem; letter-spacing: 0.06em; color: var(--white); margin: 0 0 24px;">
       <strong style="font-weight: 900; font-size: 1.3rem;">STEP 1</strong>
       <span style="color: var(--dim); font-weight: 400;"> — Must Watch Free Training</span>
     </p>
@@ -185,7 +220,7 @@
     <div id="yt-facade" onclick="
       var d=document.getElementById('yt-facade');
       d.innerHTML='<iframe src=\'https://www.youtube-nocookie.com/embed/DLVqUPZKZjc?autoplay=1&rel=0&modestbranding=1\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen style=\'position:absolute;inset:0;width:100%;height:100%;\'></iframe>';
-    " style="position: relative; padding-bottom: 45%; max-width: 85%; margin: 0 auto; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 56px rgba(0,0,0,0.6); cursor: pointer; background: var(--bg-2);">
+    " class="video-wrap" style="position: relative; padding-bottom: 45%; max-width: 85%; margin: 0 auto; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 56px rgba(0,0,0,0.6); cursor: pointer; background: var(--bg-2);">
       <img src="https://img.youtube.com/vi/DLVqUPZKZjc/maxresdefault.jpg" alt="How I lost 20 lbs in 40 days"
         style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;"
         onerror="this.src='https://img.youtube.com/vi/DLVqUPZKZjc/hqdefault.jpg'">
@@ -206,10 +241,10 @@
 
     <!-- Discover -->
     <div style="margin-top: 72px;">
-      <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.15; color: var(--white); margin: 0 0 16px; text-transform: uppercase;">
+      <h2 class="discover-heading" style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.15; color: var(--white); margin: 0 0 16px; text-transform: uppercase;">
         Discover The<br>Proven Systems
       </h2>
-      <p style="font-size: 1.05rem; line-height: 1.7; margin: 0;">
+      <p class="discover-sub" style="font-size: 1.05rem; line-height: 1.7; margin: 0;">
         <span style="color: var(--dim);">That made my</span> <strong style="color: var(--white);">abs pop out</strong> <span style="color: var(--dim);">in under 60 days</span>
       </p>
     </div>
@@ -280,19 +315,19 @@
     </div>
 
     <div class="grid-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
-      <div class="card" style="text-align: center;">
+      <div class="card call-card" style="text-align: center;">
         <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(196,160,48,0.1); border: 1px solid rgba(196,160,48,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">1</div>
         <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--white); margin: 0 0 10px;">Fat Loss Audit</h3>
         <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">We identify what's holding you back and where your biggest opportunity is.</p>
       </div>
 
-      <div class="card" style="text-align: center;">
+      <div class="card call-card" style="text-align: center;">
         <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(196,160,48,0.1); border: 1px solid rgba(196,160,48,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">2</div>
         <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--white); margin: 0 0 10px;">Custom Game Plan</h3>
         <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">You get a personalized strategy you can start using right away.</p>
       </div>
 
-      <div class="card" style="text-align: center;">
+      <div class="card call-card" style="text-align: center;">
         <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(196,160,48,0.1); border: 1px solid rgba(196,160,48,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">3</div>
         <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--white); margin: 0 0 10px;">Program Overview</h3>
         <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">I walk you through how coaching works and you decide if it's the right fit.</p>
@@ -380,11 +415,11 @@
 <section style="padding: var(--section-pad) 24px 120px; background: var(--bg-2); border-top: 1px solid var(--border);">
   <div style="max-width: 600px; margin: 0 auto; text-align: center;">
 
-    <h2 style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.025em; line-height: 1.15; color: var(--white); margin: 0 0 20px;">
+    <h2 class="closing-heading" style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.025em; line-height: 1.15; color: var(--white); margin: 0 0 20px;">
       Still reading?<br>
       <span style="color: var(--gold);">That means you're serious.</span>
     </h2>
-    <p style="font-size: 1.05rem; line-height: 1.75; color: var(--body); margin: 0 0 40px;">
+    <p class="closing-body" style="font-size: 1.05rem; line-height: 1.75; color: var(--body); margin: 0 0 40px;">
       Book the free call. I'll find the thing that's actually holding you back, give you a plan to fix it, and show you how we can work together. Takes 30 minutes.
     </p>
 
