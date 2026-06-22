@@ -139,49 +139,58 @@
 
     /* ── Responsive ───────────────────────── */
     @media (max-width: 768px) {
-      :root { --section-pad: 64px; }
+      :root { --section-pad: 60px; --max-w: 100%; }
+      body { padding-left: 20px; padding-right: 20px; }
       .grid-2 { grid-template-columns: 1fr !important; }
       .grid-3 { grid-template-columns: 1fr !important; }
       .dm-cols { flex-direction: column !important; }
       .sticky-bar span { display: none; }
 
-      .hero-h1 { font-size: 2.2rem !important; }
-      .section-heading { font-size: 1.5rem !important; }
-      .discover-heading { font-size: 1.6rem !important; }
+      .hero-h1 { font-size: 2rem !important; margin-bottom: 16px !important; }
+      .hero-sub { font-size: 0.95rem !important; margin-bottom: 36px !important; }
+      .section-heading { font-size: 1.5rem !important; margin-bottom: 12px !important; }
+      .discover-heading { font-size: 1.4rem !important; }
       .discover-heading br { display: none; }
-      .step-line { font-size: 1.1rem !important; margin-bottom: 16px !important; }
-      .step-line strong { font-size: 1.1rem !important; }
+      .discover-wrap { margin-top: 44px !important; }
+      .discover-sub { font-size: 0.9rem !important; }
+      .step-line { font-size: 1rem !important; margin-bottom: 14px !important; }
+      .step-line strong { font-size: 1rem !important; }
       .cta { padding: 14px 32px !important; font-size: 0.82rem !important; }
-      .card { padding: 22px 18px !important; }
+      .card { padding: 24px 20px !important; }
+      .card h3 { font-size: 1.15rem !important; }
+      .card p { font-size: 0.88rem !important; line-height: 1.6 !important; }
+      .call-card h3 { font-size: 1.1rem !important; }
       .faq-q { font-size: 0.95rem !important; }
-      .call-card h3 { font-size: 1.2rem !important; }
-      .discover-wrap { margin-top: 48px !important; }
-      .hero-sub { margin-bottom: 40px !important; }
+      .faq-a p { font-size: 0.88rem !important; }
+      .closing-heading { font-size: 1.4rem !important; }
+      .closing-body { font-size: 0.95rem !important; }
+      .section-sub { font-size: 0.88rem !important; }
     }
 
     @media (max-width: 480px) {
       :root { --section-pad: 48px; }
-      body { padding-bottom: 50px; }
+      body { padding-bottom: 50px; padding-left: 16px; padding-right: 16px; }
 
-      .hero-h1 { font-size: 1.85rem !important; line-height: 1.15 !important; margin-bottom: 14px !important; }
-      .hero-sub { font-size: 0.9rem !important; margin-bottom: 32px !important; }
-      .section-heading { font-size: 1.3rem !important; margin-bottom: 12px !important; }
-      .discover-heading { font-size: 1.35rem !important; }
-      .discover-sub { font-size: 0.88rem !important; }
-      .step-line { font-size: 0.92rem !important; margin-bottom: 12px !important; }
-      .step-line strong { font-size: 0.92rem !important; }
-      .cta { padding: 14px 24px !important; font-size: 0.78rem !important; letter-spacing: 0.06em !important; }
-      .card { padding: 18px 16px !important; }
-      .card h3 { font-size: 1.1rem !important; }
-      .card p { font-size: 0.82rem !important; }
+      .hero-h1 { font-size: 1.75rem !important; line-height: 1.15 !important; }
+      .hero-sub { font-size: 0.88rem !important; margin-bottom: 28px !important; }
+      .section-heading { font-size: 1.25rem !important; }
+      .discover-heading { font-size: 1.2rem !important; }
+      .discover-wrap { margin-top: 36px !important; }
+      .discover-sub { font-size: 0.85rem !important; }
+      .step-line { font-size: 0.88rem !important; margin-bottom: 12px !important; }
+      .step-line strong { font-size: 0.88rem !important; }
+      .cta { padding: 13px 24px !important; font-size: 0.78rem !important; letter-spacing: 0.06em !important; }
+      .card { padding: 20px 16px !important; }
+      .card h3 { font-size: 1rem !important; }
+      .card p { font-size: 0.84rem !important; }
+      .call-card h3 { font-size: 0.95rem !important; }
       .faq-q { font-size: 0.88rem !important; }
       .faq-a p { font-size: 0.84rem !important; }
-      .section-sub { font-size: 0.85rem !important; }
-      .closing-heading { font-size: 1.3rem !important; }
-      .closing-body { font-size: 0.9rem !important; }
+      .closing-heading { font-size: 1.2rem !important; }
+      .closing-body { font-size: 0.88rem !important; }
+      .section-sub { font-size: 0.82rem !important; }
       .sticky-bar .cta { padding: 10px 20px !important; font-size: 0.78rem !important; }
       .video-wrap { max-width: 100% !important; padding-bottom: 56.25% !important; }
-      .discover-wrap { margin-top: 40px !important; }
     }
   </style>
 </head>
