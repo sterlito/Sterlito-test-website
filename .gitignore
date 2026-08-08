@@ -4,3 +4,4 @@ node_modules/
 !brand_assets/*.png
 !dm-screenshots/*.png
 .claude/
+.env.local
