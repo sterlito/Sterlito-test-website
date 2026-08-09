@@ -1,5 +1,11 @@
 # CLAUDE.md — Frontend Website Rules
 
+## Git Sync (Mac ↔ PC)
+- This repo is shared between the user's Mac and Windows PC via GitHub (`origin`). The user has authorized automatic git sync so both machines stay in step without asking each time.
+- **Start of session:** run `git pull` before making any changes, so you're building on the other machine's latest work.
+- **After every change (once it's confirmed working):** stage, commit with a clear message, and `git push` — don't batch up multiple unrelated changes before pushing.
+- No need to ask permission for routine `git pull` / `git add` / `git commit` / `git push` on this repo. Still avoid force-push, reset --hard, or anything destructive without asking.
+
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 
