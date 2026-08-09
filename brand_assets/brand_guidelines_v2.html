@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sterlito — Brand Guidelines v2 (Proposal)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --ink: #211812;
+    --ground: #FFFFFF;
+    --ground-warm: #FAF7F3;
+    --ember: #D9531A;
+    --ember-deep: #9C3812;
+    --stone: #7A7168;
+    --line: #EAE3DB;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── Thesis band ── */
+  .thesis {
+    background: var(--ink);
+    color: var(--ground);
+    padding: 80px 64px 64px;
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin: 0 0 20px;
+  }
+  .thesis h1 {
+    font-size: clamp(2.6rem, 5.2vw, 4.6rem);
+    line-height: 1.02;
+    margin: 0 0 24px;
+    text-wrap: balance;
+  }
+  .thesis h1 em { font-style: normal; color: var(--ember); }
+  .thesis p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #C9C0B6;
+    max-width: 44ch;
+    margin: 0;
+  }
+
+  section { padding: 56px 64px; border-bottom: 1px solid var(--line); }
+  .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin: 0 0 28px;
+  }
+
+  /* ── Palette ── */
+  .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .swatch { border-radius: 4px; overflow: hidden; border: 1px solid var(--line); }
+  .swatch-fill { height: 96px; }
+  .swatch-meta { padding: 12px 14px; background: var(--ground); }
+  .swatch-name { font-size: 0.82rem; font-weight: 600; margin: 0 0 2px; }
+  .swatch-hex { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--stone); margin: 0; }
+
+  /* ── Type specimen ── */
+  .type-row { display: flex; align-items: baseline; gap: 32px; padding: 22px 0; border-top: 1px solid var(--line); }
+  .type-row:first-of-type { border-top: none; }
+  .type-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--stone); width: 140px; flex-shrink: 0; }
+  .type-sample-display { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 2.4rem; letter-spacing: -0.03em; margin: 0; }
+  .type-sample-display.medium { font-weight: 700; font-size: 1.5rem; }
+  .type-sample-body { font-family: 'IBM Plex Sans', sans-serif; font-size: 1.05rem; line-height: 1.7; color: var(--ink); margin: 0; max-width: 52ch; }
+  .type-sample-mono { font-family: 'IBM Plex Mono', monospace; font-size: 1.3rem; color: var(--ember-deep); margin: 0; }
+
+  /* ── In practice ── */
+  .practice-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: start; }
+  .card {
+    background: var(--ground-warm);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 32px;
+  }
+  .stat-row { display: flex; gap: 28px; margin-bottom: 24px; }
+  .stat-num { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 1.8rem; color: var(--ember-deep); font-variant-numeric: tabular-nums; }
+  .stat-label { font-size: 0.78rem; color: var(--stone); margin-top: 2px; }
+  .card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; margin: 0 0 10px; }
+  .card p { font-size: 0.92rem; line-height: 1.65; color: var(--stone); margin: 0 0 20px; }
+  .btn {
+    display: inline-block;
+    background: var(--ember);
+    color: #FFFFFF;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.18s ease, transform 0.18s ease;
+  }
+  .btn:hover { background: var(--ember-deep); transform: translateY(-1px); }
+
+  .dark-card {
+    background: var(--ink);
+    color: var(--ground);
+    border-radius: 6px;
+    padding: 32px;
+    height: 100%;
+  }
+  .dark-card .eyebrow { margin-bottom: 14px; }
+  .dark-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; margin: 0 0 10px; color: var(--ground); }
+  .dark-card p { font-size: 0.9rem; line-height: 1.65; color: #C9C0B6; margin: 0; }
+
+  /* ── Keywords ── */
+  .keywords { display: flex; flex-wrap: wrap; gap: 12px; }
+  .keyword {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 8px 16px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--ink);
+  }
+  .keyword.accent { border-color: var(--ember); color: var(--ember-deep); background: rgba(217,83,26,0.06); }
+</style>
+</head>
+<body>
+
+<div class="thesis">
+  <p class="eyebrow">Brand Guidelines · Draft v2</p>
+  <h1 class="display">Discipline,<br><em>warmed up.</em></h1>
+  <p>A calm, credible coaching brand — built on one confident ember-orange against clean white, not a shouting sales-page palette.</p>
+</div>
+
+<section>
+  <p class="label">Color Palette</p>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-fill" style="background:#211812;"></div>
+      <div class="swatch-meta"><p class="swatch-name">Ink</p><p class="swatch-hex">#211812</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-fill" style="background:#FFFFFF; border-bottom:1px solid var(--line);"></div>
+      <div class="swatch-meta"><p class="swatch-name">White</p><p class="swatch-hex">#FFFFFF</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-fill" style="background:#FAF7F3; border-bottom:1px solid var(--line);"></div>
+      <div class="swatch-meta"><p class="swatch-name">Warm Ground</p><p class="swatch-hex">#FAF7F3</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-fill" style="background:#D9531A;"></div>
+      <div class="swatch-meta"><p class="swatch-name">Ember</p><p class="swatch-hex">#D9531A</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-fill" style="background:#9C3812;"></div>
+      <div class="swatch-meta"><p class="swatch-name">Ember Deep</p><p class="swatch-hex">#9C3812</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="label">Typography</p>
+  <div class="type-row">
+    <span class="type-tag">Display / Bricolage<br>Grotesque 800</span>
+    <p class="type-sample-display">Lose fat without losing your life.</p>
+  </div>
+  <div class="type-row">
+    <span class="type-tag">Display / Medium</span>
+    <p class="type-sample-display medium">What happens on the call</p>
+  </div>
+  <div class="type-row">
+    <span class="type-tag">Body / IBM Plex<br>Sans 400–500</span>
+    <p class="type-sample-body">Helping people lose multiple pounds per week without running, working out, or following a strict diet. Simple systems, not willpower.</p>
+  </div>
+  <div class="type-row">
+    <span class="type-tag">Data / IBM Plex<br>Mono 500</span>
+    <p class="type-sample-mono">−18 lbs · 6 weeks</p>
+  </div>
+</section>
+
+<section>
+  <p class="label">In Practice</p>
+  <div class="practice-grid">
+    <div class="card">
+      <div class="stat-row">
+        <div>
+          <div class="stat-num">2,340</div>
+          <div class="stat-label">maintenance cal</div>
+        </div>
+        <div>
+          <div class="stat-num">6.2</div>
+          <div class="stat-label">km / day walk</div>
+        </div>
+      </div>
+      <h3 class="display">Free Strategy Call</h3>
+      <p>One ember accent, used once per view. No shaking, no shouting — the color carries the weight.</p>
+      <a class="btn" href="#">Book a Strategy Call</a>
+    </div>
+    <div class="dark-card">
+      <p class="eyebrow" style="margin-bottom:14px;">Dark Surface</p>
+      <h3>Ink grounds the page</h3>
+      <p>Ink (#211812) stands in for pure black — warmer, and it lets Ember read as fire against coal rather than a random accent color.</p>
+    </div>
+  </div>
+</section>
+
+<section style="border-bottom: none;">
+  <p class="label">Brand Words</p>
+  <div class="keywords">
+    <span class="keyword accent">Calm</span>
+    <span class="keyword">Credible</span>
+    <span class="keyword">Direct</span>
+    <span class="keyword accent">Warm</span>
+    <span class="keyword">Systems-first</span>
+    <span class="keyword">Unhurried</span>
+    <span class="keyword accent">Confident</span>
+  </div>
+</section>
+
+</body>
+</html>
