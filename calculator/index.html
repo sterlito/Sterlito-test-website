@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calorie & Walking Calculator — Lean With Sterlito</title>
+<meta name="description" content="Find your maintenance calories, target calories, and daily walking distance in under a minute.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-soft:#FBFAF8;
+    --ink:#15161A;
+    --ink-soft:#565A63;
+    --ink-faint:#8D919A;
+    --line:#EAE8E4;
+    --line-strong:#DBD8D2;
+    --orange:#FF5A1F;
+    --orange-deep:#D6430E;
+    --orange-tint:#FFF0E8;
+    --orange-glow:rgba(255,90,31,0.24);
+    --shadow-sm:0 1px 2px rgba(21,22,26,0.04), 0 8px 20px -14px rgba(21,22,26,0.16);
+    --shadow-md:0 12px 32px -14px rgba(21,22,26,0.18);
+    --radius:16px;
+    --ease:cubic-bezier(0.22,1,0.36,1);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(255,90,31,0.05), transparent 42%),
+      radial-gradient(circle at 0% 100%, rgba(255,90,31,0.035), transparent 38%),
+      var(--paper);
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    opacity:0.035;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:140px 140px;
+  }
+  h1,h2,h3,.display{
+    font-family:'Manrope',system-ui,sans-serif;
+    font-weight:800;
+    letter-spacing:-0.02em;
+    text-wrap:balance;
+    margin:0;
+  }
+  button{font-family:inherit;}
+  ::selection{background:var(--orange-tint);color:var(--orange-deep);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- shell ---------- */
+  #app{
+    position:relative;
+    z-index:2;
+    height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .progress-track{
+    position:fixed;
+    top:0; left:0; right:0;
+    height:4px;
+    background:var(--line);
+    z-index:50;
+  }
+  .progress-fill{
+    height:100%;
+    width:100%;
+    background:linear-gradient(90deg, var(--orange), var(--orange-deep));
+    transform:scaleX(0);
+    transform-origin:left center;
+    transition:transform 0.5s var(--ease);
+    box-shadow:0 0 12px 0 var(--orange-glow);
+  }
+
+  .brand-mark{
+    position:fixed;
+    top:24px; left:28px;
+    font-family:'Manrope',sans-serif;
+    font-weight:800;
+    font-size:14px;
+    letter-spacing:0.01em;
+    color:var(--ink);
+    z-index:40;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .brand-mark .dot{width:7px;height:7px;border-radius:50%;background:var(--orange); box-shadow:0 0 0 3px var(--orange-tint);}
+
+  .step-count{
+    position:fixed;
+    top:25px; right:28px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink-faint);
+    font-variant-numeric:tabular-nums;
+    z-index:40;
+    letter-spacing:0.02em;
+  }
+  .step-count b{color:var(--ink-soft);}
+
+  .stage{
+    flex:1;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:100px 24px 120px;
+  }
+
+  .step{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:100px 24px 120px;
+    opacity:0;
+    transform:translateY(18px);
+    pointer-events:none;
+    transition:opacity 0.42s var(--ease), transform 0.42s var(--ease);
+  }
+  .step.is-active{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+  .step.is-leaving{
+    opacity:0;
+    transform:translateY(-18px);
+  }
+
+  .step-inner{
+    width:100%;
+    max-width:600px;
+  }
+
+  .eyebrow{
+    font-size:13px;
+    font-weight:700;
+    color:var(--orange-deep);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px; height:1.5px;
+    background:var(--orange);
+    display:inline-block;
+  }
+
+  .question{
+    font-size:clamp(26px,4.2vw,40px);
+    line-height:1.12;
+    margin-bottom:8px;
+  }
+  .subtext{
+    font-size:16px;
+    color:var(--ink-soft);
+    line-height:1.65;
+    margin-top:10px;
+    margin-bottom:0;
+    max-width:520px;
+  }
+
+  .field-area{margin-top:38px;}
+
+  /* ---------- shared surface: card ---------- */
+  .surface{
+    background:var(--paper);
+    border:1.5px solid var(--line-strong);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-sm);
+    transition:transform 0.25s var(--ease), border-color 0.25s var(--ease), background-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+
+  /* ---------- option cards (gender) ---------- */
+  .option-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .option-card{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+    padding:24px 22px;
+    cursor:pointer;
+    text-align:left;
+  }
+  .option-card:hover{
+    transform:translateY(-3px);
+    border-color:var(--orange);
+    box-shadow:0 16px 30px -18px var(--orange-glow);
+  }
+  .option-card:focus-visible{
+    outline:none;
+    border-color:var(--orange);
+    box-shadow:0 0 0 4px var(--orange-tint);
+  }
+  .option-card.is-selected{
+    border-color:var(--orange);
+    background:var(--orange-tint);
+    box-shadow:0 16px 30px -18px var(--orange-glow);
+  }
+  .option-card-icon{
+    width:44px; height:44px;
+    border-radius:12px;
+    background:var(--paper-soft);
+    display:flex; align-items:center; justify-content:center;
+    transition:background-color 0.25s var(--ease);
+  }
+  .option-card.is-selected .option-card-icon{background:#fff;}
+  .option-card svg{width:22px;height:22px;stroke:var(--ink);transition:stroke 0.25s var(--ease);}
+  .option-card.is-selected svg{stroke:var(--orange-deep);}
+  .option-card-label{font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;}
+
+  /* ---------- activity list ---------- */
+  .activity-list{display:flex;flex-direction:column;gap:10px;}
+  .activity-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:15px 18px;
+    cursor:pointer;
+  }
+  .activity-row:hover{border-color:var(--orange); transform:translateY(-2px); box-shadow:0 14px 26px -18px var(--orange-glow);}
+  .activity-row:focus-visible{outline:none; border-color:var(--orange); box-shadow:0 0 0 4px var(--orange-tint);}
+  .activity-row.is-selected{border-color:var(--orange); background:var(--orange-tint); box-shadow:0 14px 26px -18px var(--orange-glow);}
+  .bars{display:flex; align-items:flex-end; gap:3.5px; height:22px; flex-shrink:0;}
+  .bars span{width:5px; background:var(--line-strong); border-radius:2px; transition:background-color 0.25s var(--ease);}
+  .bars span:nth-child(1){height:35%;}
+  .bars span:nth-child(2){height:50%;}
+  .bars span:nth-child(3){height:65%;}
+  .bars span:nth-child(4){height:80%;}
+  .bars span:nth-child(5){height:100%;}
+  .bars span.lit{background:var(--ink-soft);}
+  .activity-row.is-selected .bars span.lit{background:var(--orange);}
+  .activity-text{flex:1;}
+  .activity-label{font-family:'Manrope',sans-serif;font-weight:800; font-size:16px;}
+  .activity-desc{font-size:13.5px; color:var(--ink-soft); margin-top:2px;}
+
+  /* ---------- input card (age / height / weight) ---------- */
+  .input-card{
+    padding:28px 30px;
+  }
+  .input-card:focus-within{
+    border-color:var(--orange);
+    box-shadow:0 0 0 4px var(--orange-tint);
+  }
+  .num-input-row{display:flex; align-items:baseline; gap:12px;}
+  .num-input{
+    font-family:'Manrope',sans-serif;
+    font-weight:800;
+    font-size:clamp(40px,7vw,56px);
+    color:var(--ink);
+    border:none;
+    background:transparent;
+    width:200px;
+    padding:0;
+    outline:none;
+    font-variant-numeric:tabular-nums;
+  }
+  .num-input::-webkit-outer-spin-button,
+  .num-input::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;}
+  .num-input[type="number"]{-moz-appearance:textfield;}
+  .num-input::placeholder{color:var(--line-strong);}
+  .num-suffix{font-size:16px; color:var(--ink-soft); font-weight:600;}
+
+  .unit-toggle{
+    display:inline-flex;
+    border:1.5px solid var(--line-strong);
+    border-radius:999px;
+    padding:3px;
+    gap:2px;
+    margin-bottom:16px;
+  }
+  .unit-toggle button{
+    border:none;
+    background:transparent;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:background-color 0.25s var(--ease), color 0.25s var(--ease);
+  }
+  .unit-toggle button.is-active{background:var(--ink); color:#fff;}
+
+  .dual-input{display:flex; align-items:baseline;}
+  .dual-input .num-input-row + .num-input-row{
+    padding-left:26px;
+    margin-left:26px;
+    border-left:1.5px solid var(--line);
+  }
+
+  /* ---------- rate chips ---------- */
+  .rate-grid{display:flex; flex-wrap:wrap; gap:12px;}
+  .rate-chip{
+    position:relative;
+    padding:18px 22px;
+    cursor:pointer;
+    min-width:118px;
+    text-align:center;
+  }
+  .rate-chip:hover{transform:translateY(-3px); border-color:var(--orange); box-shadow:0 14px 26px -18px var(--orange-glow);}
+  .rate-chip:focus-visible{outline:none; border-color:var(--orange); box-shadow:0 0 0 4px var(--orange-tint);}
+  .rate-chip.is-selected{border-color:var(--orange); background:var(--orange-tint); box-shadow:0 14px 26px -18px var(--orange-glow);}
+  .rate-chip-num{font-family:'Manrope',sans-serif; font-weight:800; font-size:22px;}
+  .rate-chip-unit{font-size:12px; color:var(--ink-soft); margin-top:2px;}
+  .rate-chip-badge{
+    position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    background:var(--orange); color:#fff; font-size:10.5px; font-weight:700;
+    padding:3px 9px; border-radius:999px; letter-spacing:0.03em; white-space:nowrap;
+    box-shadow:0 4px 10px -2px var(--orange-glow);
+  }
+
+  /* ---------- slider ---------- */
+  .slider-card{padding:32px 30px 28px;}
+  .slider-readout{
+    font-family:'Manrope',sans-serif; font-weight:800;
+    font-size:clamp(42px,7.5vw,60px);
+    font-variant-numeric:tabular-nums;
+    margin-bottom:4px;
+  }
+  .slider-readout span{font-size:18px; color:var(--ink-soft); font-weight:600; margin-left:6px;}
+  input[type="range"]{
+    -webkit-appearance:none; appearance:none;
+    width:100%; height:6px; border-radius:999px;
+    background:var(--line-strong);
+    margin-top:30px;
+    outline:none;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:26px; height:26px; border-radius:50%;
+    background:#fff; border:4px solid var(--orange);
+    box-shadow:0 6px 16px -4px var(--orange-glow);
+    cursor:pointer;
+    transition:transform 0.2s var(--ease);
+  }
+  input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.1);}
+  input[type="range"]::-moz-range-thumb{
+    width:26px; height:26px; border-radius:50%;
+    background:#fff; border:4px solid var(--orange);
+    box-shadow:0 6px 16px -4px var(--orange-glow);
+    cursor:pointer;
+  }
+  .slider-scale{display:flex; justify-content:space-between; margin-top:10px; font-size:12.5px; color:var(--ink-faint); font-weight:600;}
+
+  /* ---------- nav ---------- */
+  .step-nav{
+    position:fixed;
+    bottom:28px; right:28px;
+    display:flex; align-items:center; gap:10px;
+    z-index:40;
+  }
+  .btn-back{
+    border:none; background:none; cursor:pointer;
+    font-size:14px; font-weight:600; color:var(--ink-soft);
+    padding:12px 14px;
+    transition:color 0.2s var(--ease);
+  }
+  .btn-back:hover{color:var(--ink);}
+  .btn-back:disabled{opacity:0; pointer-events:none;}
+
+  .btn-continue{
+    border:none; cursor:pointer;
+    background:var(--ink); color:#fff;
+    font-size:14.5px; font-weight:700;
+    padding:15px 26px;
+    border-radius:999px;
+    display:inline-flex; align-items:center; gap:8px;
+    box-shadow:var(--shadow-md);
+    transition:transform 0.22s var(--ease), background-color 0.22s var(--ease), box-shadow 0.22s var(--ease), opacity 0.22s var(--ease);
+  }
+  .btn-continue:hover:not(:disabled){background:var(--orange); box-shadow:0 16px 32px -14px var(--orange-glow); transform:translateY(-2px);}
+  .btn-continue:hover:not(:disabled) svg{transform:translateX(3px);}
+  .btn-continue:active:not(:disabled){transform:translateY(0);}
+  .btn-continue:focus-visible{outline:none; box-shadow:0 0 0 4px var(--orange-tint), var(--shadow-md);}
+  .btn-continue:disabled{opacity:0.35; cursor:not-allowed; box-shadow:none;}
+  .btn-continue svg{width:16px; height:16px; stroke:currentColor; transition:transform 0.22s var(--ease);}
+
+  .hint-key{
+    position:fixed;
+    bottom:34px; left:28px;
+    font-size:12.5px; color:var(--ink-faint); font-weight:600;
+    display:flex; align-items:center; gap:8px;
+    z-index:40;
+  }
+  .hint-key kbd{
+    border:1.3px solid var(--line-strong); border-radius:5px;
+    padding:2px 7px; font-family:inherit; font-size:11.5px; color:var(--ink-soft);
+    background:var(--paper);
+  }
+  @media (max-width:640px){ .hint-key{display:none;} }
+
+  /* ---------- result screen ---------- */
+  .result-screen{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    padding:80px 24px 60px;
+    opacity:0; transform:translateY(20px);
+    pointer-events:none;
+    transition:opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    overflow-y:auto;
+  }
+  .result-screen.is-active{opacity:1; transform:translateY(0); pointer-events:auto;}
+  .result-inner{width:100%; max-width:680px; text-align:center; margin:auto;}
+  .result-badge{
+    width:52px; height:52px; margin:0 auto 20px;
+    border-radius:16px;
+    background:var(--orange-tint);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 12px 24px -14px var(--orange-glow);
+  }
+  .result-badge svg{width:24px;height:24px;stroke:var(--orange-deep);}
+  .result-eyebrow{font-size:13px; font-weight:700; color:var(--orange-deep); text-transform:uppercase; letter-spacing:0.1em;}
+  .result-title{font-size:clamp(30px,4.5vw,42px); margin-top:12px;}
+  .result-sub{color:var(--ink-soft); font-size:16px; margin-top:12px; line-height:1.65;}
+
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:40px;
+  }
+  .stat-tile{
+    background:var(--paper-soft);
+    border:1.5px solid var(--line);
+    border-radius:18px;
+    padding:26px 16px;
+    text-align:center;
+    box-shadow:var(--shadow-sm);
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  }
+  .result-screen.is-active .stat-tile{opacity:1; transform:translateY(0);}
+  .result-screen.is-active .stat-tile:nth-child(1){transition-delay:0.08s;}
+  .result-screen.is-active .stat-tile:nth-child(2){transition-delay:0.16s;}
+  .result-screen.is-active .stat-tile:nth-child(3){transition-delay:0.24s;}
+  .stat-tile.is-primary{
+    background:linear-gradient(180deg, var(--orange-tint), #fff);
+    border-color:var(--orange);
+    box-shadow:0 20px 40px -24px var(--orange-glow);
+  }
+  .stat-label{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-soft);}
+  .stat-value{font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(28px,5vw,38px); margin-top:10px; font-variant-numeric:tabular-nums;}
+  .stat-value span{font-size:14px; color:var(--ink-soft); font-weight:600; margin-left:3px;}
+  .stat-tile.is-primary .stat-value{color:var(--orange-deep);}
+
+  .result-note{font-size:13px; color:var(--ink-faint); margin-top:20px; line-height:1.6;}
+
+  .result-adjust{margin-top:32px; text-align:left;}
+  .result-adjust-label{font-size:13px; font-weight:700; color:var(--ink-soft); margin-bottom:12px;}
+  .result-adjust .slider-card{padding:24px 26px 22px;}
+  .result-adjust .slider-readout{font-size:clamp(28px,4vw,34px); margin-bottom:2px;}
+  .result-adjust .slider-readout span{font-size:15px;}
+  .result-adjust input[type="range"]{margin-top:22px;}
+
+  .cta-block{
+    margin-top:44px;
+    padding-top:36px;
+    border-top:1.5px solid var(--line);
+  }
+  .cta-block p{font-size:15px; color:var(--ink-soft); margin:0 0 18px; line-height:1.65;}
+  .btn-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--orange); color:#fff;
+    font-family:'Manrope',sans-serif; font-weight:800; font-size:16px;
+    padding:17px 30px; border-radius:999px;
+    text-decoration:none;
+    box-shadow:0 16px 32px -14px var(--orange-glow);
+    transition:transform 0.22s var(--ease), background-color 0.22s var(--ease), box-shadow 0.22s var(--ease);
+  }
+  .btn-cta:hover{background:var(--orange-deep); transform:translateY(-3px); box-shadow:0 20px 40px -14px var(--orange-glow);}
+  .btn-cta:hover svg{transform:translate(2px,-2px);}
+  .btn-cta:active{transform:translateY(-1px);}
+  .btn-cta:focus-visible{outline:none; box-shadow:0 0 0 4px var(--orange-tint), 0 16px 32px -14px var(--orange-glow);}
+  .btn-cta svg{width:17px; height:17px; stroke:currentColor; transition:transform 0.22s var(--ease);}
+
+  @media (max-width:520px){
+    .option-grid{grid-template-columns:1fr;}
+    .stat-grid{grid-template-columns:1fr; gap:10px;}
+    .dual-input{gap:0;}
+    .input-card{padding:24px 22px;}
+    .stage, .step, .result-screen{padding-left:20px; padding-right:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="brand-mark"><span class="dot"></span>Lean With Sterlito</div>
+<div class="step-count" id="stepCount"></div>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<div id="app">
+  <div class="stage" id="stage">
+
+    <!-- 0: gender -->
+    <section class="step" data-step="sex">
+      <div class="step-inner">
+        <span class="eyebrow">Step 1 of 7</span>
+        <h1 class="question">What's your gender?</h1>
+        <div class="field-area option-grid">
+          <div class="option-card surface" data-value="male" role="button" tabindex="0">
+            <div class="option-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="6"/><path d="M14.5 9.5 20 4"/><path d="M14 4h6v6"/></svg></div>
+            <div class="option-card-label">Male</div>
+          </div>
+          <div class="option-card surface" data-value="female" role="button" tabindex="0">
+            <div class="option-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15v6"/><path d="M9 18h6"/></svg></div>
+            <div class="option-card-label">Female</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1: age -->
+    <section class="step" data-step="age">
+      <div class="step-inner">
+        <span class="eyebrow">Step 2 of 7</span>
+        <h1 class="question">How old are you?</h1>
+        <div class="field-area">
+          <div class="input-card surface">
+            <div class="num-input-row">
+              <input class="num-input" id="ageInput" type="number" inputmode="numeric" min="14" max="90" placeholder="—" autocomplete="off">
+              <span class="num-suffix">years</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2: height -->
+    <section class="step" data-step="height">
+      <div class="step-inner">
+        <span class="eyebrow">Step 3 of 7</span>
+        <h1 class="question">How tall are you?</h1>
+        <div class="field-area">
+          <div class="unit-toggle" id="heightUnitToggle">
+            <button type="button" data-unit="ftin" class="is-active">ft / in</button>
+            <button type="button" data-unit="cm">cm</button>
+          </div>
+          <div id="heightFtIn" class="input-card surface dual-input">
+            <div class="num-input-row"><input class="num-input" style="width:90px" id="heightFt" type="number" inputmode="numeric" min="3" max="8" placeholder="—"><span class="num-suffix">ft</span></div>
+            <div class="num-input-row"><input class="num-input" style="width:90px" id="heightIn" type="number" inputmode="numeric" min="0" max="11" placeholder="—"><span class="num-suffix">in</span></div>
+          </div>
+          <div id="heightCmWrap" class="input-card surface num-input-row" style="display:none">
+            <input class="num-input" id="heightCm" type="number" inputmode="numeric" min="120" max="230" placeholder="—">
+            <span class="num-suffix">cm</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3: weight -->
+    <section class="step" data-step="weight">
+      <div class="step-inner">
+        <span class="eyebrow">Step 4 of 7</span>
+        <h1 class="question">What's your current weight?</h1>
+        <div class="field-area">
+          <div class="unit-toggle" id="weightUnitToggle">
+            <button type="button" data-unit="lb" class="is-active">lb</button>
+            <button type="button" data-unit="kg">kg</button>
+          </div>
+          <div class="input-card surface">
+            <div class="num-input-row">
+              <input class="num-input" id="weightInput" type="number" inputmode="decimal" min="60" max="500" placeholder="—">
+              <span class="num-suffix" id="weightSuffix">lb</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4: activity -->
+    <section class="step" data-step="activity">
+      <div class="step-inner">
+        <span class="eyebrow">Step 5 of 7</span>
+        <h1 class="question">How active is your day-to-day?</h1>
+        <p class="subtext">Outside of dedicated walking — we'll add that separately.</p>
+        <div class="field-area activity-list" id="activityList"></div>
+      </div>
+    </section>
+
+    <!-- 5: rate -->
+    <section class="step" data-step="rate">
+      <div class="step-inner">
+        <span class="eyebrow">Step 6 of 7</span>
+        <h1 class="question">How fast do you want to lose weight?</h1>
+        <div class="field-area rate-grid" id="rateGrid"></div>
+      </div>
+    </section>
+
+    <!-- 6: walk -->
+    <section class="step" data-step="walk">
+      <div class="step-inner">
+        <span class="eyebrow">Step 7 of 7</span>
+        <h1 class="question">How far will you walk each day?</h1>
+        <p class="subtext">Make sure you can do this every single day — don't go too high.</p>
+        <div class="field-area">
+          <div class="input-card surface slider-card">
+            <div class="slider-readout"><span id="walkVal">3.0</span><span>km / day</span></div>
+            <input type="range" id="walkSlider" min="0" max="15" step="0.5" value="3">
+            <div class="slider-scale"><span>0 km</span><span>15 km</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- result -->
+  <div class="result-screen" id="resultScreen">
+    <div class="result-inner">
+      <div class="result-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <span class="result-eyebrow">Your plan</span>
+      <h2 class="result-title">Here's where you stand</h2>
+      <p class="result-sub" id="resultSummary"></p>
+
+      <div class="stat-grid">
+        <div class="stat-tile">
+          <div class="stat-label">Maintenance</div>
+          <div class="stat-value" id="statMaintenance">— <span>kcal</span></div>
+        </div>
+        <div class="stat-tile is-primary">
+          <div class="stat-label">Target intake</div>
+          <div class="stat-value" id="statTarget">— <span>kcal</span></div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-label">Daily walking</div>
+          <div class="stat-value" id="statWalk">— <span>km</span></div>
+        </div>
+      </div>
+
+      <div class="result-adjust">
+        <div class="result-adjust-label">Try walking more or less</div>
+        <div class="input-card surface slider-card">
+          <div class="slider-readout"><span id="resultWalkVal">3.0</span><span>km / day</span></div>
+          <input type="range" id="resultWalkSlider" min="0" max="15" step="0.5" value="3">
+          <div class="slider-scale"><span>0 km</span><span>15 km</span></div>
+        </div>
+      </div>
+
+      <p class="result-note" id="resultNote"></p>
+
+      <div class="cta-block">
+        <p>Want to make fat loss consistent and easy?</p>
+        <a class="btn-cta" href="https://www.skool.com/lean-with-sterlito-9202" target="_blank" rel="noopener">
+          Join Lean With Sterlito on Skool
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hint-key">Press <kbd>Enter</kbd> to continue</div>
+  <div class="step-nav">
+    <button class="btn-back" id="btnBack">Back</button>
+    <button class="btn-continue" id="btnContinue">
+      <span id="btnContinueLabel">Continue</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var ACTIVITY = [
+    {key:'sedentary', label:'Sedentary', desc:'Little or no exercise, desk job', mult:1.2, bars:1},
+    {key:'light', label:'Lightly active', desc:'Light exercise 1–3 days/week', mult:1.375, bars:2},
+    {key:'moderate', label:'Moderately active', desc:'Moderate exercise 3–5 days/week', mult:1.55, bars:3},
+    {key:'active', label:'Very active', desc:'Hard exercise 6–7 days/week', mult:1.725, bars:4},
+    {key:'extra', label:'Extremely active', desc:'Physical job or training twice a day', mult:1.9, bars:5}
+  ];
+  var RATES = [
+    {value:0, label:'Maintain'},
+    {value:0.5, label:'0.5 lb/wk'},
+    {value:1, label:'1 lb/wk', badge:'Recommended'},
+    {value:1.5, label:'1.5 lb/wk'},
+    {value:2, label:'2 lb/wk'},
+    {value:2.5, label:'2.5 lb/wk'},
+    {value:3, label:'3 lb/wk'}
+  ];
+
+  var STEPS = ['sex','age','height','weight','activity','rate','walk'];
+
+  var state = {
+    sex:null, age:null,
+    heightUnit:'ftin', heightFt:null, heightIn:null, heightCm:null,
+    weightUnit:'lb', weightLb:null, weightKg:null,
+    activity:null, rate:null, walkKm:3
+  };
+
+  var current = 0;
+  var resultShown = false;
+  var stage = document.getElementById('stage');
+  var progressFill = document.getElementById('progressFill');
+  var stepCount = document.getElementById('stepCount');
+  var btnBack = document.getElementById('btnBack');
+  var btnContinue = document.getElementById('btnContinue');
+  var btnContinueLabel = document.getElementById('btnContinueLabel');
+  var resultScreen = document.getElementById('resultScreen');
+  var stepNav = document.querySelector('.step-nav');
+  var hintKey = document.querySelector('.hint-key');
+
+  function $(sel, ctx){ return (ctx||document).querySelector(sel); }
+  function $all(sel, ctx){ return Array.prototype.slice.call((ctx||document).querySelectorAll(sel)); }
+
+  // ---------- build activity list ----------
+  var activityList = document.getElementById('activityList');
+  ACTIVITY.forEach(function(a){
+    var row = document.createElement('div');
+    row.className = 'activity-row surface';
+    row.dataset.value = a.key;
+    row.tabIndex = 0;
+    row.setAttribute('role','button');
+    var bars = '';
+    for (var i=1;i<=5;i++){ bars += '<span class="'+(i<=a.bars?'lit':'')+'"></span>'; }
+    row.innerHTML =
+      '<div class="bars">'+bars+'</div>' +
+      '<div class="activity-text"><div class="activity-label">'+a.label+'</div><div class="activity-desc">'+a.desc+'</div></div>';
+    row.addEventListener('click', function(){ selectActivity(a.key); });
+    row.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectActivity(a.key);} });
+    activityList.appendChild(row);
+  });
+  function selectActivity(key){
+    state.activity = key;
+    $all('.activity-row').forEach(function(r){ r.classList.toggle('is-selected', r.dataset.value===key); });
+    setTimeout(goNext, 260);
+  }
+
+  // ---------- build rate chips ----------
+  var rateGrid = document.getElementById('rateGrid');
+  RATES.forEach(function(r){
+    var chip = document.createElement('div');
+    chip.className = 'rate-chip surface';
+    chip.dataset.value = r.value;
+    chip.tabIndex = 0;
+    chip.setAttribute('role','button');
+    chip.innerHTML =
+      (r.badge ? '<span class="rate-chip-badge">'+r.badge+'</span>' : '') +
+      '<div class="rate-chip-num">'+r.label.split(' ')[0]+'</div>' +
+      '<div class="rate-chip-unit">'+(r.value===0?'lb / week':'lb / week')+'</div>';
+    chip.addEventListener('click', function(){ selectRate(r.value); });
+    chip.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectRate(r.value);} });
+    rateGrid.appendChild(chip);
+  });
+  function selectRate(value){
+    state.rate = value;
+    $all('.rate-chip').forEach(function(c){ c.classList.toggle('is-selected', parseFloat(c.dataset.value)===value); });
+    setTimeout(goNext, 260);
+  }
+
+  // ---------- gender cards ----------
+  $all('.option-card').forEach(function(card){
+    card.addEventListener('click', function(){ selectSex(card.dataset.value); });
+    card.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectSex(card.dataset.value);} });
+  });
+  function selectSex(value){
+    state.sex = value;
+    $all('.option-card').forEach(function(c){ c.classList.toggle('is-selected', c.dataset.value===value); });
+    setTimeout(goNext, 260);
+  }
+
+  // ---------- height unit toggle ----------
+  var heightFtIn = document.getElementById('heightFtIn');
+  var heightCmWrap = document.getElementById('heightCmWrap');
+  $all('#heightUnitToggle button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      state.heightUnit = btn.dataset.unit;
+      $all('#heightUnitToggle button').forEach(function(b){ b.classList.toggle('is-active', b===btn); });
+      heightFtIn.style.display = state.heightUnit==='ftin' ? 'flex' : 'none';
+      heightCmWrap.style.display = state.heightUnit==='cm' ? 'flex' : 'none';
+    });
+  });
+
+  var heightFtInput = document.getElementById('heightFt');
+  var heightInInput = document.getElementById('heightIn');
+  heightFtInput.addEventListener('input', function(){
+    if (heightFtInput.value.length >= 1) heightInInput.focus();
+  });
+
+  // ---------- weight unit toggle ----------
+  var weightInput = document.getElementById('weightInput');
+  var weightSuffix = document.getElementById('weightSuffix');
+  $all('#weightUnitToggle button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      state.weightUnit = btn.dataset.unit;
+      $all('#weightUnitToggle button').forEach(function(b){ b.classList.toggle('is-active', b===btn); });
+      weightSuffix.textContent = state.weightUnit;
+      weightInput.value = '';
+      weightInput.focus();
+    });
+  });
+
+  // ---------- walking slider ----------
+  var walkSlider = document.getElementById('walkSlider');
+  var walkVal = document.getElementById('walkVal');
+  walkSlider.addEventListener('input', function(){
+    state.walkKm = parseFloat(walkSlider.value);
+    walkVal.textContent = state.walkKm.toFixed(1);
+  });
+
+  // ---------- validation per step ----------
+  function canProceed(){
+    switch(STEPS[current]){
+      case 'sex': return !!state.sex;
+      case 'age':
+        var ageVal = parseInt(document.getElementById('ageInput').value,10);
+        return ageVal>=14 && ageVal<=90;
+      case 'height':
+        if (state.heightUnit==='ftin'){
+          var ft = parseInt(document.getElementById('heightFt').value,10);
+          var inch = parseInt(document.getElementById('heightIn').value,10);
+          return ft>=3 && ft<=8 && inch>=0 && inch<=11;
+        } else {
+          var cm = parseFloat(document.getElementById('heightCm').value);
+          return cm>=120 && cm<=230;
+        }
+      case 'weight':
+        var w = parseFloat(weightInput.value);
+        if (state.weightUnit==='lb') return w>=60 && w<=500;
+        return w>=25 && w<=225;
+      case 'activity': return !!state.activity;
+      case 'rate': return state.rate!==null;
+      case 'walk': return true;
+      default: return false;
+    }
+  }
+
+  function persistCurrentInputs(){
+    switch(STEPS[current]){
+      case 'age':
+        state.age = parseInt(document.getElementById('ageInput').value,10); break;
+      case 'height':
+        if (state.heightUnit==='ftin'){
+          state.heightFt = parseInt(document.getElementById('heightFt').value,10);
+          state.heightIn = parseInt(document.getElementById('heightIn').value,10);
+        } else {
+          state.heightCm = parseFloat(document.getElementById('heightCm').value);
+        }
+        break;
+      case 'weight':
+        if (state.weightUnit==='lb') state.weightLb = parseFloat(weightInput.value);
+        else state.weightKg = parseFloat(weightInput.value);
+        break;
+    }
+  }
+
+  // ---------- nav / progress rendering ----------
+  var sections = {};
+  $all('.step').forEach(function(s){ sections[s.dataset.step] = s; });
+
+  function render(){
+    STEPS.forEach(function(key, i){
+      sections[key].classList.toggle('is-active', i===current);
+    });
+    var pct = (current+1) / (STEPS.length+1); // +1 leaves room before result reveal
+    progressFill.style.transform = 'scaleX('+pct+')';
+    stepCount.innerHTML = '<b>'+(current+1)+'</b> / '+STEPS.length;
+    btnBack.disabled = current===0;
+    btnContinueLabel.textContent = STEPS[current]==='walk' ? 'See my numbers' : 'Continue';
+    updateContinueState();
+  }
+
+  function updateContinueState(){
+    btnContinue.disabled = !canProceed();
+  }
+
+  function goNext(){
+    if (!canProceed()) { updateContinueState(); return; }
+    persistCurrentInputs();
+    if (current < STEPS.length-1){
+      current++;
+      render();
+      focusCurrentInput();
+    } else {
+      revealResult();
+    }
+  }
+
+  function goBack(){
+    if (current===0) return;
+    current--;
+    render();
+    focusCurrentInput();
+  }
+
+  function focusCurrentInput(){
+    var key = STEPS[current];
+    var el = null;
+    if (key==='age') el = document.getElementById('ageInput');
+    else if (key==='height') el = state.heightUnit==='ftin' ? document.getElementById('heightFt') : document.getElementById('heightCm');
+    else if (key==='weight') el = weightInput;
+    if (el) setTimeout(function(){ el.focus(); }, 300);
+  }
+
+  btnBack.addEventListener('click', goBack);
+  btnContinue.addEventListener('click', goNext);
+
+  $all('input[type="number"]').forEach(function(inp){
+    inp.addEventListener('input', updateContinueState);
+    inp.addEventListener('keydown', function(e){
+      if (e.key==='Enter'){ e.preventDefault(); goNext(); }
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (resultShown) return;
+    var tag = document.activeElement.tagName;
+    if (e.key==='Enter' && tag!=='INPUT'){ goNext(); }
+    if (e.key==='ArrowLeft' && tag!=='INPUT'){ goBack(); }
+  });
+
+  // ---------- calculations ----------
+  function computeResults(){
+    var heightCm = state.heightUnit==='cm' ? state.heightCm : (state.heightFt*30.48 + state.heightIn*2.54);
+    var weightKg = state.weightUnit==='kg' ? state.weightKg : state.weightLb*0.45359237;
+    var bmr = state.sex==='male'
+      ? 10*weightKg + 6.25*heightCm - 5*state.age + 5
+      : 10*weightKg + 6.25*heightCm - 5*state.age - 161;
+    var activityMult = ACTIVITY.filter(function(a){return a.key===state.activity;})[0].mult;
+    var maintenance = bmr*activityMult;
+    var walkCalories = weightKg * state.walkKm * 0.9;
+    var dailyDeficit = (state.rate*3500)/7;
+    var target = maintenance + walkCalories - dailyDeficit;
+    return {
+      bmr: bmr,
+      maintenance: maintenance,
+      target: target,
+      walkKm: state.walkKm,
+      rate: state.rate
+    };
+  }
+
+  function roundTo10(n){ return Math.round(n/10)*10; }
+
+  function renderResult(results){
+    var maintenanceRounded = roundTo10(results.maintenance);
+    var targetRounded = roundTo10(results.target);
+    document.getElementById('statMaintenance').innerHTML = maintenanceRounded.toLocaleString()+' <span>kcal</span>';
+    document.getElementById('statTarget').innerHTML = targetRounded.toLocaleString()+' <span>kcal</span>';
+    document.getElementById('statWalk').innerHTML = results.walkKm.toFixed(1)+' <span>km</span>';
+
+    var summary = results.rate>0
+      ? 'Eat around ' + targetRounded.toLocaleString() + ' kcal and walk ' + results.walkKm.toFixed(1) + ' km daily to lose roughly ' + results.rate + ' lb per week.'
+      : 'Eat around ' + targetRounded.toLocaleString() + ' kcal and walk ' + results.walkKm.toFixed(1) + ' km daily to maintain your current weight.';
+    document.getElementById('resultSummary').textContent = summary;
+
+    document.getElementById('resultNote').textContent = 'Estimates based on the Mifflin-St Jeor equation. Not medical advice — consult a professional for personalized guidance.';
+  }
+
+  function revealResult(){
+    var results = computeResults();
+    renderResult(results);
+    resultShown = true;
+    resultScreen.classList.add('is-active');
+    stage.style.display = 'none';
+    stepNav.style.display = 'none';
+    hintKey.style.display = 'none';
+    progressFill.style.transform = 'scaleX(1)';
+
+    resultWalkSlider.value = state.walkKm;
+    resultWalkVal.textContent = state.walkKm.toFixed(1);
+  }
+
+  // ---------- live walking adjustment on result screen ----------
+  var resultWalkSlider = document.getElementById('resultWalkSlider');
+  var resultWalkVal = document.getElementById('resultWalkVal');
+  resultWalkSlider.addEventListener('input', function(){
+    state.walkKm = parseFloat(resultWalkSlider.value);
+    resultWalkVal.textContent = state.walkKm.toFixed(1);
+    renderResult(computeResults());
+  });
+
+  render();
+  focusCurrentInput();
+})();
+</script>
+</body>
+</html>
