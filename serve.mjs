@@ -98,8 +98,7 @@ createServer(async (req, res) => {
     return handleLead(req, res);
   }
 
-  let url = req.url === '/' ? '/index.html' : req.url;
-  if (url === '/calculator' || url === '/calculator/') url = '/calculator/index.html';
+  const url = req.url === '/' ? '/index.html' : req.url;
   const filePath = join(__dirname, url.split('?')[0]);
   const ext = extname(filePath);
   try {
