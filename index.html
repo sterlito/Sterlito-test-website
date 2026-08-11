@@ -12,13 +12,13 @@
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     html, body { margin: 0; padding: 0; overflow-x: hidden; }
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
       background: #FFFFFF;
       color: #565A63;
       -webkit-font-smoothing: antialiased;
@@ -28,14 +28,14 @@
 
     :root {
       --bg-1: #FFFFFF;
-      --bg-2: #FBFAF8;
+      --bg-2: #FAF7F3;
       --bg-card: #FFFFFF;
-      --gold: #FF5A1F;
-      --gold-dark: #D6430E;
-      --white: #15161A;
-      --body: #565A63;
-      --dim: #767B87;
-      --border: #EAE8E4;
+      --gold: #D9531A;
+      --gold-dark: #9C3812;
+      --white: #211812;
+      --body: #5B534A;
+      --dim: #8A8176;
+      --border: #EAE3DB;
       --section-pad: 96px;
       --max-w: 880px;
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -51,43 +51,28 @@
     }
 
     /* ── Buttons ─────────────────────────── */
-    @keyframes shake-burst {
-      0%, 45%, 100% { transform: translateY(0); }
-      4% { transform: translateY(-8px); }
-      8% { transform: translateY(6px); }
-      12% { transform: translateY(-7px); }
-      16% { transform: translateY(5px); }
-      20% { transform: translateY(-6px); }
-      24% { transform: translateY(4px); }
-      28% { transform: translateY(-4px); }
-      32% { transform: translateY(3px); }
-      36% { transform: translateY(-2px); }
-      40% { transform: translateY(0); }
-    }
     .cta {
       display: inline-block;
       background: var(--gold);
-      color: #15161A;
-      padding: 16px 44px;
+      color: #FFFFFF;
+      padding: 16px 40px;
       border-radius: 6px;
-      border: 2px solid var(--gold-dark);
-      font-family: 'Manrope', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 800;
+      border: none;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
       text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      box-shadow: 0 4px 24px rgba(255,90,31,.25);
-      animation: shake-burst 2.5s ease-in-out infinite;
-      transition: opacity 0.18s ease;
+      letter-spacing: 0.01em;
+      box-shadow: 0 10px 28px -10px rgba(217,83,26,.45);
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
     }
-    .cta:hover { animation: none; transform: translateY(-2px); opacity: .92; }
-    .cta:active { animation: none; transform: translateY(0); }
+    .cta:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 14px 32px -10px rgba(156,56,18,.5); }
+    .cta:active { transform: translateY(0); }
     .cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
     /* ── Section heading ─────────────────── */
     .section-heading {
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Bricolage Grotesque', sans-serif;
       font-weight: 800;
       font-size: clamp(1.8rem, 4.5vw, 2.6rem);
       letter-spacing: -0.02em;
@@ -96,7 +81,7 @@
       margin: 0 0 16px;
     }
     .section-sub {
-      font-family: 'Inter', sans-serif;
+      font-family: 'IBM Plex Sans', sans-serif;
       font-size: 1rem;
       color: var(--dim);
       line-height: 1.7;
@@ -107,7 +92,7 @@
     .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
     .faq-item:last-child { border-bottom: none; }
     .faq-q {
-      font-family: 'Manrope', sans-serif; font-size: 1.05rem; font-weight: 700;
+      font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.05rem; font-weight: 700;
       color: var(--white); cursor: pointer; display: flex; align-items: center;
       justify-content: space-between; gap: 16px; background: none; border: none;
       width: 100%; text-align: left; padding: 0; line-height: 1.4;
@@ -118,7 +103,7 @@
     .faq-item.open .faq-q svg { transform: rotate(180deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding-top: 0; }
     .faq-item.open .faq-a { max-height: 200px; padding-top: 16px; }
-    .faq-a p { font-family: 'Inter', sans-serif; font-size: 0.92rem; color: var(--body); line-height: 1.7; margin: 0; }
+    .faq-a p { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.92rem; color: var(--body); line-height: 1.7; margin: 0; }
 
     /* ── DM images ────────────────────────── */
     .dm-img {
@@ -130,13 +115,13 @@
     /* ── Freebie callout ──────────────────── */
     .freebie-card {
       text-align: center;
-      border-color: rgba(255,90,31,0.28);
-      background: linear-gradient(180deg, rgba(255,90,31,0.07), var(--bg-card) 60%);
+      border-color: rgba(217,83,26,0.28);
+      background: linear-gradient(180deg, rgba(217,83,26,0.07), var(--bg-card) 60%);
     }
     .freebie-icon {
       width: 52px; height: 52px; margin: 0 auto 20px;
-      border-radius: 12px; background: rgba(255,90,31,0.1);
-      border: 1px solid rgba(255,90,31,0.2);
+      border-radius: 12px; background: rgba(217,83,26,0.1);
+      border: 1px solid rgba(217,83,26,0.2);
       display: flex; align-items: center; justify-content: center;
     }
 
@@ -150,8 +135,7 @@
       transform: translateY(100%); transition: transform 0.3s ease;
     }
     .sticky-bar.visible { transform: translateY(0); }
-    .sticky-bar .cta { padding: 10px 24px; font-size: 0.82rem; animation: none; }
-    .sticky-bar .cta:hover { transform: translateY(-2px); opacity: .92; }
+    .sticky-bar .cta { padding: 10px 24px; font-size: 0.82rem; }
 
     /* ── Responsive ───────────────────────── */
     @media (max-width: 768px) {
@@ -226,7 +210,7 @@
 <section style="padding: var(--section-pad) 24px; background: var(--bg-1);">
   <div style="max-width: var(--max-w); margin: 0 auto; text-align: center;">
 
-    <h1 class="hero-h1" style="font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--white); font-size: clamp(2.6rem, 7vw, 4.2rem); margin: 0 0 20px;">
+    <h1 class="hero-h1" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--white); font-size: clamp(2.6rem, 7vw, 4.2rem); margin: 0 0 20px;">
       1:1 Fat Loss Coaching
     </h1>
     <p class="hero-sub" style="font-size: 1.05rem; line-height: 1.75; color: var(--body); max-width: 520px; margin: 0 auto 56px;">
@@ -234,7 +218,7 @@
     </p>
 
     <!-- Step 1 -->
-    <p class="step-line" style="font-family: 'Manrope', sans-serif; font-size: 0.82rem; letter-spacing: 0.14em; color: var(--white); margin: 0 0 20px; text-transform: uppercase;">
+    <p class="step-line" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.82rem; letter-spacing: 0.14em; color: var(--white); margin: 0 0 20px; text-transform: uppercase;">
       <strong style="font-weight: 800;">STEP 1</strong>
       <span style="color: var(--body); font-weight: 500;"> — Must Watch Free Training</span>
     </p>
@@ -247,23 +231,23 @@
         style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;"
         onerror="this.src='https://img.youtube.com/vi/HYuW8rmRa4U/hqdefault.jpg'">
       <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,15,22,0.7), transparent 50%); display: flex; align-items: center; justify-content: center;">
-        <div style="width: 68px; height: 68px; background: rgba(255,90,31,.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 28px rgba(255,90,31,.35);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#15161A" style="margin-left: 3px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <div style="width: 68px; height: 68px; background: rgba(217,83,26,.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 28px rgba(217,83,26,.35);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#211812" style="margin-left: 3px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
       </div>
     </div>
 
     <!-- Step 2 -->
-    <p class="step-line" style="font-family: 'Manrope', sans-serif; font-size: 0.82rem; letter-spacing: 0.14em; color: var(--white); margin: 48px 0 20px; text-transform: uppercase;">
+    <p class="step-line" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.82rem; letter-spacing: 0.14em; color: var(--white); margin: 48px 0 20px; text-transform: uppercase;">
       <strong style="font-weight: 800;">STEP 2</strong>
       <span style="color: var(--body); font-weight: 500;"> — Book A 1:1 Session With Me</span>
     </p>
 
-    <a href="https://calendly.com/sterlitooo/consultation" onclick="Calendly.initPopupWidget({url:'https://calendly.com/sterlitooo/consultation'});return false;" class="cta">BOOK A STRATEGY CALL</a>
+    <a href="https://calendly.com/sterlitooo/consultation" onclick="Calendly.initPopupWidget({url:'https://calendly.com/sterlitooo/consultation'});return false;" class="cta">Book a Strategy Call</a>
 
     <!-- Discover -->
     <div class="discover-wrap" style="margin-top: 72px;">
-      <h2 class="discover-heading" style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.15; color: var(--white); margin: 0 0 16px; text-transform: uppercase;">
+      <h2 class="discover-heading" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.15; color: var(--white); margin: 0 0 16px;">
         Discover The <br>Proven Systems
       </h2>
       <p class="discover-sub" style="font-size: 1.05rem; line-height: 1.7; margin: 0;">
@@ -295,46 +279,46 @@
   <div style="max-width: var(--max-w); margin: 0 auto;">
 
     <div style="text-align: center; margin-bottom: 56px;">
-      <h2 class="section-heading" style="text-transform: uppercase;">Fat Loss Fundamentals</h2>
+      <h2 class="section-heading">Fat Loss Fundamentals</h2>
     </div>
 
     <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
       <div class="card" style="display: flex; gap: 20px; align-items: flex-start;">
-        <div style="width: 48px; height: 48px; min-width: 48px; background: rgba(255,90,31,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,90,31,0.12);">
+        <div style="width: 48px; height: 48px; min-width: 48px; background: rgba(217,83,26,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(217,83,26,0.12);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>
         <div>
-          <h3 style="font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin: 0 0 6px;">Nutrition Strategy</h3>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin: 0 0 6px;">Nutrition Strategy</h3>
           <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">Simple eating systems that work with your life. No meal prep required.</p>
         </div>
       </div>
 
       <div class="card" style="display: flex; gap: 20px; align-items: flex-start;">
-        <div style="width: 48px; height: 48px; min-width: 48px; background: rgba(255,90,31,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,90,31,0.12);">
+        <div style="width: 48px; height: 48px; min-width: 48px; background: rgba(217,83,26,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(217,83,26,0.12);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <div>
-          <h3 style="font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin: 0 0 6px;">Habits & Systems</h3>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin: 0 0 6px;">Habits & Systems</h3>
           <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">Build routines that stick. Small changes that compound into real results.</p>
         </div>
       </div>
 
       <div class="card" style="display: flex; gap: 20px; align-items: flex-start;">
-        <div style="width: 48px; height: 48px; min-width: 48px; background: rgba(255,90,31,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,90,31,0.12);">
+        <div style="width: 48px; height: 48px; min-width: 48px; background: rgba(217,83,26,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(217,83,26,0.12);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
         <div>
-          <h3 style="font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin: 0 0 6px;">Mindset Coaching</h3>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin: 0 0 6px;">Mindset Coaching</h3>
           <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">Fix the thinking that keeps you stuck. Build real, lasting confidence.</p>
         </div>
       </div>
 
       <div class="card" style="display: flex; gap: 20px; align-items: flex-start;">
-        <div style="width: 48px; height: 48px; min-width: 48px; background: rgba(255,90,31,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,90,31,0.12);">
+        <div style="width: 48px; height: 48px; min-width: 48px; background: rgba(217,83,26,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(217,83,26,0.12);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div>
-          <h3 style="font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin: 0 0 6px;">Daily Accountability</h3>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin: 0 0 6px;">Daily Accountability</h3>
           <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">Someone in your corner keeping you on track. No more going it alone.</p>
         </div>
       </div>
@@ -353,26 +337,26 @@
 
     <div class="grid-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
       <div class="card call-card" style="text-align: center;">
-        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,90,31,0.1); border: 1px solid rgba(255,90,31,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">1</div>
-        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.92rem; font-weight: 800; color: var(--white); margin: 0 0 8px;">Fat Loss Audit</h3>
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(217,83,26,0.1); border: 1px solid rgba(217,83,26,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">1</div>
+        <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.92rem; font-weight: 800; color: var(--white); margin: 0 0 8px;">Fat Loss Audit</h3>
         <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">We identify what's holding you back and where your biggest opportunity is.</p>
       </div>
 
       <div class="card call-card" style="text-align: center;">
-        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,90,31,0.1); border: 1px solid rgba(255,90,31,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">2</div>
-        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.92rem; font-weight: 800; color: var(--white); margin: 0 0 8px;">Custom Game Plan</h3>
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(217,83,26,0.1); border: 1px solid rgba(217,83,26,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">2</div>
+        <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.92rem; font-weight: 800; color: var(--white); margin: 0 0 8px;">Custom Game Plan</h3>
         <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">You get a personalized strategy you can start using right away.</p>
       </div>
 
       <div class="card call-card" style="text-align: center;">
-        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(255,90,31,0.1); border: 1px solid rgba(255,90,31,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">3</div>
-        <h3 style="font-family: 'Manrope', sans-serif; font-size: 0.92rem; font-weight: 800; color: var(--white); margin: 0 0 8px;">Program Overview</h3>
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(217,83,26,0.1); border: 1px solid rgba(217,83,26,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gold);">3</div>
+        <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.92rem; font-weight: 800; color: var(--white); margin: 0 0 8px;">Program Overview</h3>
         <p style="font-size: 0.88rem; color: var(--body); line-height: 1.65; margin: 0;">I walk you through how coaching works and you decide if it's the right fit.</p>
       </div>
     </div>
 
     <div style="text-align: center; margin-top: 48px;">
-      <a href="https://calendly.com/sterlitooo/consultation" onclick="Calendly.initPopupWidget({url:'https://calendly.com/sterlitooo/consultation'});return false;" class="cta">BOOK A STRATEGY CALL</a>
+      <a href="https://calendly.com/sterlitooo/consultation" onclick="Calendly.initPopupWidget({url:'https://calendly.com/sterlitooo/consultation'});return false;" class="cta">Book a Strategy Call</a>
     </div>
 
   </div>
@@ -451,7 +435,7 @@
 <section style="padding: var(--section-pad) 24px 120px; background: var(--bg-2); border-top: 1px solid var(--border);">
   <div style="max-width: 600px; margin: 0 auto; text-align: center;">
 
-    <h2 class="closing-heading" style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.025em; line-height: 1.15; color: var(--white); margin: 0 0 20px;">
+    <h2 class="closing-heading" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.6rem); letter-spacing: -0.025em; line-height: 1.15; color: var(--white); margin: 0 0 20px;">
       Still reading?<br>
       <span style="color: var(--gold);">That means you're serious.</span>
     </h2>
@@ -459,10 +443,10 @@
       Book the free call. I'll find the thing that's actually holding you back, give you a plan to fix it, and show you how we can work together. Takes 30 minutes.
     </p>
 
-    <a href="https://calendly.com/sterlitooo/consultation" onclick="Calendly.initPopupWidget({url:'https://calendly.com/sterlitooo/consultation'});return false;" class="cta">BOOK A STRATEGY CALL</a>
+    <a href="https://calendly.com/sterlitooo/consultation" onclick="Calendly.initPopupWidget({url:'https://calendly.com/sterlitooo/consultation'});return false;" class="cta">Book a Strategy Call</a>
 
     <div style="margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);">
-      <a href="https://www.instagram.com/sterlitooo/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; color: var(--dim); font-size: 0.88rem; text-decoration: none; font-weight: 500; transition: color 0.18s ease;" onmouseenter="this.style.color='#FF5A1F'" onmouseleave="this.style.color='var(--dim)'">
+      <a href="https://www.instagram.com/sterlitooo/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; color: var(--dim); font-size: 0.88rem; text-decoration: none; font-weight: 500; transition: color 0.18s ease;" onmouseenter="this.style.color='#D9531A'" onmouseleave="this.style.color='var(--dim)'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         @sterlitooo
       </a>
