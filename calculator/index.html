@@ -105,8 +105,13 @@
     display:flex;
     align-items:center;
     gap:9px;
+    text-decoration:none;
+    transition:opacity 0.2s var(--ease);
   }
+  .brand-mark:hover{opacity:0.7;}
+  .brand-mark:focus-visible{outline:2px solid var(--orange); outline-offset:4px; border-radius:4px;}
   .brand-mark .dot{width:7px;height:7px;border-radius:50%;background:var(--orange); box-shadow:0 0 0 3px var(--orange-tint);}
+  .brand-mark svg{width:14px;height:14px;stroke:var(--ink-soft);}
 
   .step-count{
     position:fixed;
@@ -518,7 +523,7 @@
 </head>
 <body>
 
-<div class="brand-mark"><span class="dot"></span>Lean With Sterlito</div>
+<a href="/" class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18 5 12l6-6"/></svg><span class="dot"></span>Lean With Sterlito</a>
 <div class="step-count" id="stepCount"></div>
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
