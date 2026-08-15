@@ -888,6 +888,7 @@
   $all('.step').forEach(function(s){ sections[s.dataset.step] = s; });
 
   function render(){
+    clearTimeout(autoAdvanceTimer);
     STEPS.forEach(function(key, i){
       sections[key].classList.toggle('is-active', i===current);
     });
@@ -903,7 +904,19 @@
     btnContinue.disabled = !canProceed();
   }
 
+  // Mobile numeric keypads have no Enter/Go key, so number steps auto-advance
+  // a moment after the user finishes typing a valid value.
+  var autoAdvanceTimer = null;
+  function scheduleAutoAdvance(){
+    clearTimeout(autoAdvanceTimer);
+    if (!canProceed()) return;
+    autoAdvanceTimer = setTimeout(function(){
+      if (canProceed()) goNext();
+    }, 650);
+  }
+
   function goNext(){
+    clearTimeout(autoAdvanceTimer);
     if (!canProceed()) { updateContinueState(); return; }
     persistCurrentInputs();
     if (current < STEPS.length-1){
@@ -916,6 +929,7 @@
   }
 
   function goBack(){
+    clearTimeout(autoAdvanceTimer);
     if (current===0) return;
     current--;
     render();
@@ -935,7 +949,10 @@
   btnContinue.addEventListener('click', goNext);
 
   $all('input[type="number"]').forEach(function(inp){
-    inp.addEventListener('input', updateContinueState);
+    inp.addEventListener('input', function(){
+      updateContinueState();
+      scheduleAutoAdvance();
+    });
     inp.addEventListener('keydown', function(e){
       if (e.key==='Enter'){ e.preventDefault(); goNext(); }
     });
